@@ -6,7 +6,7 @@
 #    By: dromansk <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/28 21:18:25 by dromansk          #+#    #+#              #
-#    Updated: 2019/08/28 16:18:14 by dromansk         ###   ########.fr        #
+#    Updated: 2019/08/28 18:29:11 by dromansk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ all: $(NAME)
 
 $(NAME):
 	make -C ./libft reclean
-	gcc -Wall -Werror -Wextra -c $(I) $(SRCS)
-	gcc -Wall -Werror -Wextra -o $(NAME) $(O) $(I) $(L)
+	gcc -Wall -Werror -Wextra -c $(I) $(SRCS) -ltermcap
+	gcc -Wall -Werror -Wextra -o $(NAME) $(O) $(I) $(L) -ltermcap
 
 clean:
 	make -C ./libft clean
@@ -42,13 +42,13 @@ reclean: re
 
 sreclean: fclean
 	make -C ./libft sreclean
-	gcc -Wall -Werror -Wextra -c $(I) $(SRCS) -g
-	gcc -Wall -Werror -Wextra -o $(NAME) $(O) $(I) $(L) -g
+	gcc -Wall -Werror -Wextra -c $(I) $(SRCS) -g -ltermcap
+	gcc -Wall -Werror -Wextra -o $(NAME) $(O) $(I) $(L) -g -ltermcap
 	make clean
 
 test: clean
-	gcc -Wall -Werror -Wextra -c $(I) $(SRCS)
-	gcc -Wall -Werror -Wextra -o $(NAME) $(O) $(I) $(L)
+	gcc -Wall -Werror -Wextra -c $(I) $(SRCS) -ltermcap
+	gcc -Wall -Werror -Wextra -o $(NAME) $(O) $(I) $(L) -ltermcap
 	make clean
 	./$(NAME)
 
