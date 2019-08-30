@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   select.h                                           :+:      :+:    :+:   */
+/*   sel_structs.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/28 16:39:42 by dromansk          #+#    #+#             */
-/*   Updated: 2019/08/29 21:24:38 by dromansk         ###   ########.fr       */
+/*   Created: 2019/08/28 19:20:23 by dromansk          #+#    #+#             */
+/*   Updated: 2019/08/29 15:24:14 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SELECT_H
-# define SELECT_H
-# include "termcap.h"
-# include "sel_structs.h"
-# define ULINE "\e[4m"
-# define REV "\e[7m"
-# define REV_ULINE "\e[4;7m"
-# define NORM "\e[m"
+#ifndef SEL_STRUCTS_H
+# define SEL_STRUCTS_H
 
-t_sel_list		*make_list(int ac, char **av);
-t_select		*make_select(t_sel_list *options, termios_p *termios);
+typedef struct s_sel_list	t_sel_list;
+typedef struct s_select		t_select;
+
+struct	s_sel_list
+{
+	char		*option;
+	int			col;
+	int			row;
+	int			sel;
+	t_sel_list	*next;
+};
+
+struct	s_select
+{
+	int			mcol;
+	int			mrow;
+	t_sel_list	*options;
+	termios_p	*termios;
+	int			status;
+}
 
 #endif
