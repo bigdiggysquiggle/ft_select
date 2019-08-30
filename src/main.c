@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/08/29 21:23:49 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/08/29 21:26:51 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static t_select	ft_select(t_select *sel)
 int				main(int ac, char **av)
 {
 	t_sel_list	*list;
-	termios_o	*og;
+	termios_o	og;
 
 	if (!isatty(0))
 		//error here
@@ -56,7 +56,7 @@ int				main(int ac, char **av)
 		//error here
 	if ((list = make_list(ac, av)) && (sel = make_select(list)))
 		sel = ft_select(sel);
-	tcsetattr(1, TCSANOW, og);
+	tcsetattr(1, TCSANOW, &og);
 	print_sel(sel);
 	return (0);
 }
