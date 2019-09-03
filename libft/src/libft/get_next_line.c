@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 18:26:19 by dromansk          #+#    #+#             */
-/*   Updated: 2019/07/09 19:15:44 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/03 13:38:13 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		ft_new_line(char **s, char **line, int fd, int r)
 
 int		get_next_line(const int fd, char **line)
 {
-	static char	*s[255];
+	static char	*s[65535];
 	char		buf[BUFF_SIZE + 1];
 	char		*tmp;
 	int			r;

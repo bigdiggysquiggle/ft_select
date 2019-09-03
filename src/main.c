@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/08/29 21:26:51 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/08/31 15:56:40 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ int				main(int ac, char **av)
 	if (tcgettatr(0, &og))
 		//error here
 	if ((list = make_list(ac, av)) && (sel = make_select(list)))
+	{
+		store_sel(sel);
 		sel = ft_select(sel);
+	}
 	tcsetattr(1, TCSANOW, &og);
 	print_sel(sel);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 19:35:21 by dromansk          #+#    #+#             */
-/*   Updated: 2019/08/29 21:24:43 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/08/31 16:05:37 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,17 @@
 /*
 ** possibility that argv items would get erased under larger memory loads
 */
+
+t_select			*store_sel(t_select *sel)
+{
+	static t_select *stored;
+
+	if (sel == NULL)
+		sel = stored;
+	else
+		stored = sel;
+	return (sel);
+}
 
 static t_sel_list	*new_item(char *item)
 {
