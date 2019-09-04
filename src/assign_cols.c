@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:13:55 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/03 20:31:57 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/04 14:34:47 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void		assign_pos(t_select *sel, int cols, int size, int len)
 	while (counter <= i)
 	{
 		assign_every_i(opts, i, len, counter - 1);
-		opt = opt->next;
+		opts = opts->next;
 		counter++;
 	}
 }

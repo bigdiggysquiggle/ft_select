@@ -6,43 +6,45 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/03 20:47:48 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:03:01 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "select.h"
 
-t_select	*sel;
-
 void			ft_do_cap(char *cap)
 {
 	char	*s;
 
-	s = tgetstr(cap);
-	tputs(s, 1);
+	s = tgetstr(cap, NULL);
+	tputs(s, 1, NULL);
 }
 
 void			noncanon(sel)
 {
-	tcgettattr(0, sel->termios);
-	tcsettatr(0, ICANON, sel->termios);
+	tcgetattr(0, sel->termios);
+	tcsetattr(0, ICANON, sel->termios);
 }
 
 void			handle_input(t_select *sel, char c)
 {
-	if (c == SPACE)
+	add_colour(sel->options->sel ? REV : NORM, sel->options);
+	if (c == *SPACE)
 		select_item(sel);
-	if (c == LEFT)
+	if (c == *LEFT)
 		move_hor(sel, sel->options->prev);
-	if (c == RIGHT)
+	if (c == *RIGHT)
 		move_hor(sel, sel->options->next);
-	if (c == UP)
+	if (c == *UP)
 		move_ver(sel, 1);
-	if (c == DOWN)
+	if (c == *DOWN)
 		move_ver(sel, 0);
+	if (c == *DEL)// || c == BS)
+		del_item(sel);
+	add_colour(sel->options->sel ? REV_ULINE : ULINE, sel->options);
 }
 
-static t_select	ft_select(t_select *sel)
+static t_select	*ft_select(t_select *sel)
 {
 //	char	buf[45067];
 	char	c[1];
@@ -59,10 +61,12 @@ static t_select	ft_select(t_select *sel)
 		handle_input(sel, *c);
 	}
 //	tputs(buf);
+	return (sel);
 }
 
 int				main(int ac, char **av)
 {
+	t_select	*sel;
 	t_sel_list	*list;
 	termios_o	og;
 
@@ -81,8 +85,9 @@ int				main(int ac, char **av)
 		ft_printf("Error: Failed to generate selection list\n");
 		return (1);
 	}
+	free_sel(sel);
 	tcsetattr(1, TCSANOW, &og);
 	ft_do_cap("rmcup");//might be wrong termcap
-	print_sel(sel);
+	print_selected(sel);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 19:35:21 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/03 20:20:42 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/04 14:00:20 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,19 @@ t_select			*make_select(t_sel_list *options)
 		return (sel);
 	}
 	return (NULL);
+}
+
+void			free_sel(t_select *sel)
+{
+	t_sel_list	*tmp;
+
+	tmp = sel->options->next->next;
+	while (tmp != sel->options)
+	{
+		free(tmp->prev);
+		tmp = tmp->next;
+	}
+	free(tmp->prev);
+	free(tmp);
+	free(sel);
 }

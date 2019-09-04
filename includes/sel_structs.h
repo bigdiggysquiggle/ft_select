@@ -6,12 +6,13 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 19:20:23 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/03 20:26:11 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/04 14:42:23 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SEL_STRUCTS_H
 # define SEL_STRUCTS_H
+# include "termios.h"
 
 typedef struct s_sel_list	t_sel_list;
 typedef struct s_select		t_select;
@@ -35,6 +36,6 @@ struct	s_select
 	t_sel_list	*options;
 	termios_p	*termios;
 	int			status;
-}
+};
 
 #endif
