@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 19:35:21 by dromansk          #+#    #+#             */
-/*   Updated: 2019/08/31 16:05:37 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/03 20:20:42 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static t_sel_list	*new_item(char *item)
 		new->option = item;
 		new->col = 0;
 		new->row = 0;
+		new->len = ft_strlen(item);
 		new->sel = 0;
 		new->next = NULL;
 		return (new);
@@ -58,9 +59,11 @@ t_sel_list			*make_list(int ac, char **av)
 			while (++i < ac)
 			{
 				list->next = new_item(av[i]);
+				list->next->prev = list;
 				list = list->next;
 			}
-			return (list);
+			item->prev = list;;
+			return (item);
 		}
 	}
 	return (NULL);
