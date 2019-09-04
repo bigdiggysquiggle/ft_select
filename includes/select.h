@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 16:39:42 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/04 15:02:09 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:11:48 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define SPACE "PLACEHOLDER"
 
 t_sel_list		*make_list(int ac, char **av);
-t_select		*make_select(t_sel_list *options, termios_p *termios);
+t_select		*make_select(t_sel_list *options);
 t_select		*store_sel(t_select *sel);
 void			free_sel(t_select *sel);
 void			sel_signals(void);

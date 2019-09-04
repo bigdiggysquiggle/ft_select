@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 19:35:21 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/04 14:00:20 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:14:12 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,15 @@ t_sel_list			*make_list(int ac, char **av)
 
 t_select			*make_select(t_sel_list *options)
 {
-	t_select	*sel;
-	termios_p	*termios;
+	t_select		*sel;
+	struct termios	termios;
 
 	if ((sel = (t_select *)malloc(sizeof(t_select))) && !tcgetattr(0, &termios))
 	{
 		sel->mcol = 0;
 		sel->mrow = 0;
 		sel->options = options;
-		sel->termios = termios;
+		sel->termios = &termios;
 		sel->status = 0;
 		return (sel);
 	}

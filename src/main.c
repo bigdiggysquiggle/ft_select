@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/04 15:03:01 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:16:44 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void			ft_do_cap(char *cap)
 	tputs(s, 1, NULL);
 }
 
-void			noncanon(sel)
+void			noncanon(t_select *sel)
 {
 	tcgetattr(0, sel->termios);
 	tcsetattr(0, ICANON, sel->termios);
@@ -66,13 +66,14 @@ static t_select	*ft_select(t_select *sel)
 
 int				main(int ac, char **av)
 {
-	t_select	*sel;
-	t_sel_list	*list;
-	termios_o	og;
+	t_select		*sel;
+	t_sel_list		*list;
+	struct termios	og;
 
+	sel = NULL;
 	if (!isatty(0))
 		ft_printf("Error: Not a tty\n");
-	else if (tcgettatr(0, &og))
+	else if (tcgetattr(0, &og))
 		ft_printf("Error: Couldn't get terminal attributes\n");
 	else if ((list = make_list(ac, av)) && (sel = make_select(list)))
 	{
@@ -85,7 +86,6 @@ int				main(int ac, char **av)
 		ft_printf("Error: Failed to generate selection list\n");
 		return (1);
 	}
-	free_sel(sel);
 	tcsetattr(1, TCSANOW, &og);
 	ft_do_cap("rmcup");//might be wrong termcap
 	print_selected(sel);

@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 19:20:23 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/04 14:42:23 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:10:22 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ struct	s_sel_list
 
 struct	s_select
 {
-	int			mcol;
-	int			mrow;
-	int			col_count;
-	t_sel_list	*options;
-	termios_p	*termios;
-	int			status;
+	int				mcol;
+	int				mrow;
+	int				col_count;
+	t_sel_list		*options;
+	struct termios	*termios;
+	int				status;
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:56:36 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/04 14:56:28 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/04 15:16:04 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,9 @@ void	print_opts(t_select *sel)
 	sel->mcol = 0;
 	sel->mrow = 0;
 	add_colour(sel->options->sel ? REV_ULINE : ULINE, sel->options);
+}
+
+void	print_selected(t_select *sel)
+{
+	free_sel(sel);
 }
