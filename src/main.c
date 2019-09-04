@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/04 15:16:44 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/04 16:35:19 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,47 +20,55 @@ void			ft_do_cap(char *cap)
 	tputs(s, 1, NULL);
 }
 
-void			noncanon(t_select *sel)
+char			*read_chars(char *c)
 {
-	tcgetattr(0, sel->termios);
-	tcsetattr(0, ICANON, sel->termios);
+	if (read(1, c, 1) > 0)
+	{
+		if (c[0] != ESC && c[0] != ' ')
+			return ("");
+		else if (read(1, c, 2) > 0)
+			if (c[1] == '3' && read(1, c + 2, 1) > 0)
+				c[3] = 0;
+			else
+				c[2] = 0;
+		else
+			return ("");
+	}
+	return (c);
 }
 
-void			handle_input(t_select *sel, char c)
+void			handle_input(t_select *sel, char *c)
 {
 	add_colour(sel->options->sel ? REV : NORM, sel->options);
-	if (c == *SPACE)
+	if (ft_strequ(SPACE, c))
 		select_item(sel);
-	if (c == *LEFT)
+	if (ft_strequ(LEFT, c))
 		move_hor(sel, sel->options->prev);
-	if (c == *RIGHT)
+	if (ft_strequ(RIGHT, c))
 		move_hor(sel, sel->options->next);
-	if (c == *UP)
+	if (ft_strequ(UP, c))
 		move_ver(sel, 1);
-	if (c == *DOWN)
+	if (ft_strequ(DOWN, c))
 		move_ver(sel, 0);
-	if (c == *DEL)// || c == BS)
+	if (ft_strequ(DEL, c) || ft_strequ(BS, c))
 		del_item(sel);
 	add_colour(sel->options->sel ? REV_ULINE : ULINE, sel->options);
 }
 
 static t_select	*ft_select(t_select *sel)
 {
-//	char	buf[45067];
-	char	c[1];
-	
+	char	c[4];
 
-	noncanon(sel);
-//	tgetent(buf, getenv("TERM"));
-//	ft_do_cap("cl");
+	//getting attributes is broken af rn
+	tcgetattr(0, sel->termios);
+	tcsetattr(0, ICANON, sel->termios);
 	sel_signals();
 	print_opts(sel);
 	while (!sel->status)
 	{
-		read(1, c, 1);
-		handle_input(sel, *c);
+		read_chars(c);
+		handle_input(sel, c);
 	}
-//	tputs(buf);
 	return (sel);
 }
 
@@ -78,7 +86,7 @@ int				main(int ac, char **av)
 	else if ((list = make_list(ac, av)) && (sel = make_select(list)))
 	{
 		store_sel(sel);
-		ft_do_cap("smcup");//might be wrong termcap
+		ft_do_cap("smcup");//wrong termcap I guess
 		sel = ft_select(sel);
 	}
 	else
@@ -87,7 +95,7 @@ int				main(int ac, char **av)
 		return (1);
 	}
 	tcsetattr(1, TCSANOW, &og);
-	ft_do_cap("rmcup");//might be wrong termcap
+	ft_do_cap("rmcup");//also wrong termcap I guess
 	print_selected(sel);
 	return (0);
 }

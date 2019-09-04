@@ -6,7 +6,7 @@
 #    By: dromansk <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/28 21:18:25 by dromansk          #+#    #+#              #
-#    Updated: 2019/09/04 14:32:51 by dromansk         ###   ########.fr        #
+#    Updated: 2019/09/04 16:28:23 by dromansk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,10 +40,12 @@ re: fclean all
 reclean: re
 	make clean
 
-sreclean: fclean
+sre: fclean
 	make -C ./libft sreclean
 	gcc -Wall -Werror -Wextra -c $(I) $(SRCS) -g 
 	gcc -Wall -Werror -Wextra -o $(NAME) $(O) $(I) $(L) -g -ltermcap
+
+sreclean: sre
 	make clean
 
 test: clean
