@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/04 18:23:58 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/04 18:28:37 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int				main(int ac, char **av)
 	else if ((list = make_list(ac, av)) && (sel = make_select(list)))
 	{
 		store_sel(sel);
-		ft_do_cap("smcup");//wrong termcap I guess
+		screen_save_clear(0);
 		sel = ft_select(sel);
 	}
 	else
@@ -93,7 +93,7 @@ int				main(int ac, char **av)
 		return (1);
 	}
 	tcsetattr(1, TCSANOW, &og);
-	ft_do_cap("rmcup");//also wrong termcap I guess
+	screen_save_clear(1);
 	print_selected(sel);
 	return (0);
 }
