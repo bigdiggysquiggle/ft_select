@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/04 18:28:37 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/04 19:37:39 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void			ft_do_cap(char *cap)
 
 char			*read_chars(char *c)
 {
+	//consider changing this to read 8 bytes instead
 	if (read(1, c, 1) > 0)
 	{
 		if (c[0] != ESC && c[0] != ' ')
@@ -39,6 +40,7 @@ char			*read_chars(char *c)
 
 void			handle_input(t_select *sel, char *c)
 {
+	//if above changes, make this do numerical comparisons
 	add_colour(sel->options->sel ? REV : NORM, sel->options);
 	if (ft_strequ(SPACE, c))
 		select_item(sel);
