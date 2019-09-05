@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/04 16:35:19 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/04 18:08:44 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void			ft_do_cap(char *cap)
 	char	*s;
 
 	s = tgetstr(cap, NULL);
-	tputs(s, 1, NULL);
+	tputs(s, 1, selchar);
 }
 
 char			*read_chars(char *c)
@@ -59,8 +59,6 @@ static t_select	*ft_select(t_select *sel)
 {
 	char	c[4];
 
-	//getting attributes is broken af rn
-	tcgetattr(0, sel->termios);
 	tcsetattr(0, ICANON, sel->termios);
 	sel_signals();
 	print_opts(sel);
