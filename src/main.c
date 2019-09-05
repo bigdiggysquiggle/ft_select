@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/04 19:37:39 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/05 14:58:18 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,53 +20,48 @@ void			ft_do_cap(char *cap)
 	tputs(s, 1, selchar);
 }
 
-char			*read_chars(char *c)
+long			read_chars(void)
 {
-	//consider changing this to read 8 bytes instead
-	if (read(1, c, 1) > 0)
-	{
-		if (c[0] != ESC && c[0] != ' ')
-			return ("");
-		else if (read(1, c, 2) > 0)
-			if (c[1] == '3' && read(1, c + 2, 1) > 0)
-				c[3] = 0;
-			else
-				c[2] = 0;
-		else
-			return ("");
-	}
-	return (c);
+	long	msg;
+
+	msg = 0;
+	if (read(0, &msg, 8) < 0)
+		return (0);
+	return (msg);
 }
 
-void			handle_input(t_select *sel, char *c)
+void			handle_input(t_select *sel, long c)
 {
 	//if above changes, make this do numerical comparisons
 	add_colour(sel->options->sel ? REV : NORM, sel->options);
-	if (ft_strequ(SPACE, c))
+	if (SPACE == c)
 		select_item(sel);
-	if (ft_strequ(LEFT, c))
+	if (LEFT == c)
 		move_hor(sel, sel->options->prev);
-	if (ft_strequ(RIGHT, c))
+	if (RIGHT == c)
 		move_hor(sel, sel->options->next);
-	if (ft_strequ(UP, c))
+	if (UP == c)
 		move_ver(sel, 1);
-	if (ft_strequ(DOWN, c))
+	if (DOWN == c)
 		move_ver(sel, 0);
-	if (ft_strequ(DEL, c) || ft_strequ(BS, c))
+	if (DEL == c || BS == c)
 		del_item(sel);
+	if (ESC == c)
+		sel->status = 1;
 	add_colour(sel->options->sel ? REV_ULINE : ULINE, sel->options);
 }
 
 static t_select	*ft_select(t_select *sel)
 {
-	char	c[4];
+	long	c;
 
-	tcsetattr(0, ICANON, sel->termios);
+	sel->termios->c_iflag &= ~(ECHO | ICANON);
+	tcsetattr(0, TCSANOW, sel->termios);
 	sel_signals();
 	print_opts(sel);
 	while (!sel->status)
 	{
-		read_chars(c);
+		c = read_chars();
 		handle_input(sel, c);
 	}
 	return (sel);
