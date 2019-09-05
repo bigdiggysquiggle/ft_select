@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:56:36 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/04 18:08:30 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/04 18:23:13 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,20 @@ void	print_opts(t_select *sel)
 	sel->mcol = 0;
 	sel->mrow = 0;
 	add_colour(sel->options->sel ? REV_ULINE : ULINE, sel->options);
+}
+
+void	screen_save_clear(int mode)
+{
+	static char	buf[1024];
+
+	if (!mode)
+	{
+		ft_bzero(buf, 1024);
+		tgetent(buf, getenv("TERM"));
+		ft_do_cap("cl");
+	}
+	else
+		tputs(buf, 1, selchar);
 }
 
 void	print_selected(t_select *sel)

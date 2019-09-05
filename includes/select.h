@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 16:39:42 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/04 18:09:08 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/04 18:21:38 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_select		*make_select(t_sel_list *options);
 t_select		*store_sel(t_select *sel);
 void			free_sel(t_select *sel);
 void			sel_signals(void);
+void			screen_save_clear(int mode);
 
 void			print_selected(t_select *sel);
 void			ft_do_cap(char *cap);
