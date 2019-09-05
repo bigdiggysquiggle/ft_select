@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 20:48:15 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/04 18:09:51 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/04 18:30:49 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	select_item(t_select *sel)
 		add_colour(REV_ULINE, sel->options);
 		sel->options->sel = 1;
 	}
+	// has to move to next item
 }
 
 void	move_hor(t_select *sel, t_sel_list *opt)
