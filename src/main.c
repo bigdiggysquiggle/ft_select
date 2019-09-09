@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/05 14:58:18 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/05 21:43:34 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,48 +20,54 @@ void			ft_do_cap(char *cap)
 	tputs(s, 1, selchar);
 }
 
-long			read_chars(void)
+char			*read_chars(char *msg)
 {
-	long	msg;
+	int		ret;
 
-	msg = 0;
-	if (read(0, &msg, 8) < 0)
-		return (0);
+	ret = read(0, msg, 4);
+//	printf("ret %d\n", ret); important for key checking
+	if (ret == -1)
+		ft_bzero(msg, 4);
+	msg[ret] = 0;
+//	printf("at 4 %d\n", msg[ret]); important for key checking
 	return (msg);
 }
 
-void			handle_input(t_select *sel, long c)
+void			handle_input(t_select *sel, char *c)
 {
-	//if above changes, make this do numerical comparisons
+//	int i = 0; important for key checking
+//	while (c[i]) important for key checking
+//		printf("%d\n", c[i++]);	important for key checking
+//	printf("--------\n"); important for key checking
 	add_colour(sel->options->sel ? REV : NORM, sel->options);
-	if (SPACE == c)
+	if (ft_strequ(SPACE, c))
 		select_item(sel);
-	if (LEFT == c)
+	if (ft_strequ(LEFT, c))
 		move_hor(sel, sel->options->prev);
-	if (RIGHT == c)
+	if (ft_strequ(RIGHT, c))
 		move_hor(sel, sel->options->next);
-	if (UP == c)
+	if (ft_strequ(UP, c))
 		move_ver(sel, 1);
-	if (DOWN == c)
+	if (ft_strequ(DOWN, c))
 		move_ver(sel, 0);
-	if (DEL == c || BS == c)
+	if (ft_strequ(DEL, c) || ft_strequ(BS, c))
 		del_item(sel);
-	if (ESC == c)
+	if (ft_strequ(ESC, c))
 		sel->status = 1;
 	add_colour(sel->options->sel ? REV_ULINE : ULINE, sel->options);
 }
 
 static t_select	*ft_select(t_select *sel)
 {
-	long	c;
+	char	c[5];
 
 	sel->termios->c_iflag &= ~(ECHO | ICANON);
-	tcsetattr(0, TCSANOW, sel->termios);
+//	tcsetattr(0, TCSANOW, sel->termios); uncomment when not key checking
 	sel_signals();
 	print_opts(sel);
 	while (!sel->status)
 	{
-		c = read_chars();
+		read_chars(c);
 		handle_input(sel, c);
 	}
 	return (sel);

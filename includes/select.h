@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 16:39:42 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/04 19:36:18 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/05 21:41:19 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@
 # define REV "\e[7m"
 # define REV_ULINE "\e[4;7m"
 # define NORM "\e[m"
-# define UP 4283163
-# define DOWN 4348699
-# define RIGHT 4414235
-# define LEFT 4479771
-# define DEL 2117294875L
-# define BS 127
-# define SPACE ' '
-# define ESC 27
-# define ENTER 10
+# define UP "\e[A" 
+# define DOWN "\e[B"
+# define RIGHT "\e[C"
+# define LEFT "\e[D"
+# define DEL "\e[3~"
+# define BS "\127" //also ascii value 8 apparently
+# define SPACE " "
+# define ESC "\e"
+# define ENTER "\10"
 
 t_sel_list		*make_list(int ac, char **av);
 t_select		*make_select(t_sel_list *options);

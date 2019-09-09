@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:56:36 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/04 18:23:13 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/05 20:42:47 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	add_colour(char *colour, t_sel_list *opts)
 	char	*s;
 
 	ft_putstr(colour);
-	s = tgoto("cm", opts->col + opts->len, opts->row);
+	s = tgoto("CM", opts->col + opts->len, opts->row);
 	tputs(s, 1, selchar);
 	ft_putstr(NORM);
-	s = tgoto("cm", opts->col, opts->row);
+	s = tgoto("CM", opts->col, opts->row);
 	tputs(s, 1, selchar);
 }
 
@@ -43,16 +43,16 @@ void	print_opts(t_select *sel)
 	list = sel->options;
 	while (list != sel->options->prev)
 	{
-		s = tgoto("cm", list->col, list->row);
+		s = tgoto("CM", list->col, list->row);
 		tputs(s, 1, selchar);
 		ft_putstr(list->option);
 		list = list->next;
 	}
-	s = tgoto("cm", list->col, list->row);
+	s = tgoto("CM", list->col, list->row);
 	tputs(s, 1, selchar);
 	ft_putstr(list->option);
 	list = list->next;
-	s = tgoto("cm", 0, 0);
+	s = tgoto("CM", 0, 0);
 	tputs(s, 1, selchar);
 	sel->mcol = 0;
 	sel->mrow = 0;
