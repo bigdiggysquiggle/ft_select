@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 20:48:15 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/05 20:43:43 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/08 18:40:41 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,8 @@ void	select_item(t_select *sel)
 
 void	move_hor(t_select *sel, t_sel_list *opt)
 {
-	char	*s;
-
 	add_colour(sel->options->sel ? REV : NORM, sel->options);
-	s = tgoto("CM", opt->col, opt->row);
-	tputs(s, 1, selchar);
+	ftgoto(opt->col, opt->row);
 	sel->options = opt;
 	sel->mcol = opt->col;
 	sel->mrow = opt->row;
@@ -57,15 +54,13 @@ void	move_hor(t_select *sel, t_sel_list *opt)
 void	move_ver(t_select *sel, int up)
 {
 	int		move;
-	char	*s;
 
 	move = 0;
 	add_colour(sel->options->sel ? REV : NORM, sel->options);
 	while (move < sel->col_count)
 	{
 		sel->options = up ? sel->options->prev : sel->options->next;
-		s = tgoto("CM", sel->options->col, sel->options->row);
-		tputs(s, 1, selchar);
+		ftgoto(sel->options->col, sel->options->row);
 	}
 	sel->mcol = sel->options->col;
 	sel->mrow = sel->options->row;

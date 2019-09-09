@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 15:54:24 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/04 15:18:28 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/08 17:48:35 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,22 @@ void	win_resize(int sig)
 	}
 }
 
+void	sel_quit(int sig)
+{
+	t_select *sel;
+
+	if (sig)
+	{
+		sel = store_sel(0);
+		sel->status = 1;
+	}
+}
+
 void	sel_signals(void)
 {
 	signal(SIGWINCH, win_resize);
 //	signal(SIGKILL, sel_kill);
+	signal(SIGQUIT, sel_quit);
 //	signal(SIGSTOP, sel_stop);
 //	signal(SIGCONT, sel_cont);
 }

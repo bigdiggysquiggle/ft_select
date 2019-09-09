@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 16:39:42 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/05 21:41:19 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/08 18:38:25 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void			screen_save_clear(int mode);
 
 void			print_selected(t_select *sel);
 void			ft_do_cap(char *cap);
+void			ftgoto(int col, int row);
 void			print_opts(t_select *sel);
 void			columnize_opts(t_select *sel);
 void			add_colour(char *colour, t_sel_list *opts);

@@ -6,19 +6,11 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/05 21:43:34 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/08 18:42:10 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "select.h"
-
-void			ft_do_cap(char *cap)
-{
-	char	*s;
-
-	s = tgetstr(cap, NULL);
-	tputs(s, 1, selchar);
-}
 
 char			*read_chars(char *msg)
 {
@@ -53,6 +45,8 @@ void			handle_input(t_select *sel, char *c)
 	if (ft_strequ(DEL, c) || ft_strequ(BS, c))
 		del_item(sel);
 	if (ft_strequ(ESC, c))
+		sel->status = 2;
+	if (ft_strequ(ENTER, c))
 		sel->status = 1;
 	add_colour(sel->options->sel ? REV_ULINE : ULINE, sel->options);
 }
@@ -62,7 +56,7 @@ static t_select	*ft_select(t_select *sel)
 	char	c[5];
 
 	sel->termios->c_iflag &= ~(ECHO | ICANON);
-//	tcsetattr(0, TCSANOW, sel->termios); uncomment when not key checking
+	tcsetattr(0, TCSANOW, sel->termios);// uncomment when not key checking
 	sel_signals();
 	print_opts(sel);
 	while (!sel->status)
@@ -86,7 +80,6 @@ int				main(int ac, char **av)
 		ft_printf("Error: Couldn't get terminal attributes\n");
 	else if ((list = make_list(ac, av)) && (sel = make_select(list)))
 	{
-		store_sel(sel);
 		screen_save_clear(0);
 		sel = ft_select(sel);
 	}
