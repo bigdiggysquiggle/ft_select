@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 15:54:24 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/08 17:48:35 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/10 17:20:11 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,29 @@ void	win_resize(int sig)
 	}
 }
 
-void	sel_quit(int sig)
+void	sel_int(int sig)
 {
 	t_select *sel;
 
 	if (sig)
 	{
 		sel = store_sel(0);
-		sel->status = 1;
+		ft_dprintf(sel->termfd, "livin?\n");
+		tcsetattr(sel->termfd, TCSANOW, sel->old);;
+		ft_dprintf(sel->termfd, "livin?\n");
+		screen_save_clear(1, sel);;
+		ft_dprintf(sel->termfd, "livin?\n");
+		free_sel(sel);;
+		ft_dprintf(sel->termfd, "livin?\n");
 	}
 }
 
 void	sel_signals(void)
 {
 	signal(SIGWINCH, win_resize);
+	signal(SIGINT, sel_int);
 //	signal(SIGKILL, sel_kill);
-	signal(SIGQUIT, sel_quit);
+//	signal(SIGQUIT, sel_quit);
 //	signal(SIGSTOP, sel_stop);
 //	signal(SIGCONT, sel_cont);
 }

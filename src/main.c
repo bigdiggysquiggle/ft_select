@@ -6,11 +6,41 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/08 18:42:10 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/10 17:20:56 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "select.h"
+
+/*
+** us 'mr' to reverse colours and 'us' to underline instead
+** 'me' and 'ue' to normal
+** 'vi' to remove cursor 've' to make it normal'
+** 'ti' for nonsequential cursor movement, 'te' for normal
+*/
+
+void	screen_save_clear(int mode, t_select *sel)
+{
+	static char	buf[2048];
+
+	if (!mode)
+	{
+		ft_bzero(buf, 2048);
+		tgetent(buf, getenv("TERM"));
+		sel->termios->c_iflag &= ~(ECHO | ICANON);
+		tcsetattr(sel->termfd, TCSANOW, sel->termios);
+		store_sel(sel);
+		ft_do_cap("cl");
+		ft_do_cap("ti");
+		ft_do_cap("vi");
+	}
+	else
+	{
+		tputs(buf, 1, selchar);
+		ft_do_cap("te");
+		ft_do_cap("ve");
+	}
+}
 
 char			*read_chars(char *msg)
 {
@@ -55,8 +85,6 @@ static t_select	*ft_select(t_select *sel)
 {
 	char	c[5];
 
-	sel->termios->c_iflag &= ~(ECHO | ICANON);
-	tcsetattr(0, TCSANOW, sel->termios);// uncomment when not key checking
 	sel_signals();
 	print_opts(sel);
 	while (!sel->status)
@@ -71,25 +99,19 @@ int				main(int ac, char **av)
 {
 	t_select		*sel;
 	t_sel_list		*list;
-	struct termios	og;
 
 	sel = NULL;
 	if (!isatty(0))
 		ft_printf("Error: Not a tty\n");
-	else if (tcgetattr(0, &og))
-		ft_printf("Error: Couldn't get terminal attributes\n");
 	else if ((list = make_list(ac, av)) && (sel = make_select(list)))
 	{
-		screen_save_clear(0);
+		screen_save_clear(0, sel);
 		sel = ft_select(sel);
 	}
 	else
-	{
-		ft_printf("Error: Failed to generate selection list\n");
 		return (1);
-	}
-	tcsetattr(1, TCSANOW, &og);
-	screen_save_clear(1);
+	tcsetattr(1, TCSANOW, sel->old);
+	screen_save_clear(1, sel);
 	print_selected(sel);
 	return (0);
 }

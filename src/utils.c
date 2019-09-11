@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 18:25:42 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/08 18:29:58 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/10 16:35:08 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,13 @@ void			ftgoto(int col, int row)
 	s = tgetstr("cm", NULL);
 	s = tgoto(s, col, row);
 	tputs(s, 1, selchar);
+}
+
+int				selchar(int c)
+{
+	t_select	*sel;
+
+	sel = store_sel(0);
+	write(sel->termfd, &c, 1);
+	return (c);
 }

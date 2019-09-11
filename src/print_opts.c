@@ -6,17 +6,11 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:56:36 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/08 18:40:05 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/10 16:35:57 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "select.h"
-
-int		selchar(int c)
-{
-	write(1, &c, 1);
-	return (c);
-}
 
 void	add_colour(char *colour, t_sel_list *opts)
 {
@@ -51,20 +45,6 @@ void	print_opts(t_select *sel)
 	add_colour(sel->options->sel ? REV_ULINE : ULINE, sel->options);
 }
 
-void	screen_save_clear(int mode)
-{
-	static char	buf[1024];
-
-	if (!mode)
-	{
-		ft_bzero(buf, 1024);
-		tgetent(buf, getenv("TERM"));
-		ft_do_cap("cl");
-	}
-	else
-		tputs(buf, 1, selchar);
-}
-
 void	print_selected(t_select *sel)
 {
 	t_sel_list	*list;
@@ -74,10 +54,12 @@ void	print_selected(t_select *sel)
 		while (sel->options->row || sel->options->col)
 			sel->options = sel->options->next;
 		list = sel->options->next;
-		ft_putstr(sel->options->option);
+		if (sel->options->sel)
+			ft_putstr(sel->options->option);
 		while (list != sel->options)
 		{
-			ft_putstr(list->option);
+			if (sel->options->sel)
+				ft_putstr(list->option);
 			list = list->next;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 19:35:21 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/04 16:30:56 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/10 17:13:43 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_select			*store_sel(t_select *sel)
 	static t_select *stored;
 
 	if (sel == NULL)
-		sel = stored;
+		return(stored);
 	else
 		stored = sel;
 	return (sel);
@@ -71,18 +71,26 @@ t_sel_list			*make_list(int ac, char **av)
 
 t_select			*make_select(t_sel_list *options)
 {
-	t_select		*sel;
-	struct termios	termios;
+	t_select				*sel;
+	static struct termios	termios;
+	static struct termios	old;
 
 	if ((sel = (t_select *)malloc(sizeof(t_select))) && !tcgetattr(0, &termios))
 	{
+		ft_memcpy(&old, &termios, sizeof(struct termios));
 		sel->mcol = 0;
 		sel->mrow = 0;
 		sel->options = options;
 		sel->termios = &termios;
+		sel->old = &old;
+		sel->termfd = open(ttyname(0), O_WRONLY | O_NOCTTY);
 		sel->status = 0;
 		return (sel);
 	}
+	else if (!sel)
+		ft_printf("Error: failed to generate selection list.\n");
+	else
+		ft_printf("Error: Couldn't get terminal attributes\n");
 	return (NULL);
 }
 
