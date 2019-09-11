@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/10 17:20:56 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/09/10 17:57:50 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void			handle_input(t_select *sel, char *c)
 
 static t_select	*ft_select(t_select *sel)
 {
-	char	c[5];
+	static char	c[5];
 
 	sel_signals();
 	print_opts(sel);
