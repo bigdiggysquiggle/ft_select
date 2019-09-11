@@ -1,1 +1,5 @@
 look into how tgets and tputs really work, make sure you're actually saving and restoring properly
+
+Ctrl+C=SIGINT
+Ctrl+\=SIGQUIT
+Ctrl+Z=SIGTSTP
