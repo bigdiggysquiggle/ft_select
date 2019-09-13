@@ -3,3 +3,6 @@ look into how tgets and tputs really work, make sure you're actually saving and 
 Ctrl+C=SIGINT
 Ctrl+\=SIGQUIT
 Ctrl+Z=SIGTSTP
+
+cs........string+...Change scrolling region (DEC VT100 only); resembles cm
+cv........string+...Vertical cursor motion
