@@ -6,7 +6,7 @@
 #    By: dromansk <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/22 14:53:52 by dromansk          #+#    #+#              #
-#    Updated: 2019/07/25 19:28:56 by dromansk         ###   ########.fr        #
+#    Updated: 2019/09/23 19:20:12 by dromansk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,11 +55,11 @@ scompile:
 
 test: sreclean
 	make scompile
-	./ftest
+	./ftest | cat -e
 
 run: clean
 	make compile
-	./ftest
+	./ftest | cat -e
 
 rm: fclean
-	rm ftest main.c
+	rm -rf ftest main.c ftest.dSYM
