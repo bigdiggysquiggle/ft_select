@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:13:55 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/04 14:34:47 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/15 15:14:33 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		assign_every_i(t_sel_list *opts, int i, int len, int col_num)
 {
-	t_sel_list *curr;
+	t_sel_list	*curr;
 	int			count;
 	int			row;
 
@@ -76,7 +76,7 @@ int			len_check_lmoa(int len, int cmp)
 	return (len);
 }
 
-void		columnize_opts(t_select *sel)
+int			columnize_opts(t_select *sel)
 {
 	t_sel_list	*start;
 	t_sel_list	*opts;
@@ -94,4 +94,5 @@ void		columnize_opts(t_select *sel)
 		opts = opts->next;
 	}
 	column_count(sel, len, count);
+	return (len);
 }

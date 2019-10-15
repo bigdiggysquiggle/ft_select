@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:56:36 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/10 16:35:57 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/15 15:34:08 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,26 @@ void	add_colour(char *colour, t_sel_list *opts)
 void	print_opts(t_select *sel)
 {
 	t_sel_list	*list;
+	int			space;
 
-	columnize_opts(sel);
+	space = columnize_opts(sel);
 	list = sel->options;
-	while (list != sel->options->prev)
-	{
-		ftgoto(list->col, list->row);
-		ft_putstr(list->option);
-		list = list->next;
-	}
-	ftgoto(list->col, list->row);
-	ft_putstr(list->option);
+	ft_do_cap("cl");
+	if (list->sel)
+		ft_printf("%s%-*s%s", REV, space, list->option, NORM);
+	else
+		ft_printf("%-*s", space, list->option);
 	list = list->next;
+	while (list != sel->options)
+	{
+		if (list->sel)
+			ft_printf("%s%-*s%s", REV, space, list->option, NORM);
+		else
+			ft_printf("%-*s", space, list->option);
+		list = list->next;
+		if (!list->col)
+			ft_printf("\n");
+	}
 	ftgoto(0, 0);
 	sel->mcol = 0;
 	sel->mrow = 0;

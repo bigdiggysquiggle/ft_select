@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/10 17:57:50 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/15 15:15:41 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ** 'ti' for nonsequential cursor movement, 'te' for normal
 */
 
-void	screen_save_clear(int mode, t_select *sel)
+void			screen_save_clear(int mode, t_select *sel)
 {
 	static char	buf[2048];
 
@@ -103,10 +103,13 @@ int				main(int ac, char **av)
 	sel = NULL;
 	if (!isatty(0))
 		ft_printf("Error: Not a tty\n");
-	else if ((list = make_list(ac, av)) && (sel = make_select(list)))
+	else if ((list = make_list(ac, av)))
 	{
-		screen_save_clear(0, sel);
-		sel = ft_select(sel);
+		if ((sel = make_select(list)))
+		{
+			screen_save_clear(0, sel);
+			sel = ft_select(sel);
+		}
 	}
 	else
 		return (1);

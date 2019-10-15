@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 16:39:42 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/10 15:49:50 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/15 15:34:13 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,17 @@
 # define REV "\e[7m"
 # define REV_ULINE "\e[4;7m"
 # define NORM "\e[m"
-# define UP "\e[A" 
+# define UP "\e[A"
 # define DOWN "\e[B"
 # define RIGHT "\e[C"
 # define LEFT "\e[D"
 # define DEL "\e[3~"
-# define BS "\127" //also ascii value 8 apparently
+
+/*
+** \127 is also ascii value 8 apparently
+*/
+
+# define BS "\127"
 # define SPACE " "
 # define ESC "\e"
 # define ENTER "\10"
@@ -42,7 +47,7 @@ void			print_selected(t_select *sel);
 void			ft_do_cap(char *cap);
 void			ftgoto(int col, int row);
 void			print_opts(t_select *sel);
-void			columnize_opts(t_select *sel);
+int				columnize_opts(t_select *sel);
 void			add_colour(char *colour, t_sel_list *opts);
 void			del_item(t_select *sel);
 void			select_item(t_select *sel);

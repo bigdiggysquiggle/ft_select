@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 19:35:21 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/10 17:13:43 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/15 15:24:03 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_select			*store_sel(t_select *sel)
 	static t_select *stored;
 
 	if (sel == NULL)
-		return(stored);
+		return (stored);
 	else
 		stored = sel;
 	return (sel);
@@ -62,7 +62,8 @@ t_sel_list			*make_list(int ac, char **av)
 				list->next->prev = list;
 				list = list->next;
 			}
-			item->prev = list;;
+			item->prev = list;
+			list->next = item;
 			return (item);
 		}
 	}
@@ -94,7 +95,7 @@ t_select			*make_select(t_sel_list *options)
 	return (NULL);
 }
 
-void			free_sel(t_select *sel)
+void				free_sel(t_select *sel)
 {
 	t_sel_list	*tmp;
 
