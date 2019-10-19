@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/19 08:16:29 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/19 08:48:09 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ void			screen_save_clear(int mode, t_select *sel)
 ** it's getting stuck here cuz it's stupid af
 */
 
-char			*read_chars(char *msg)
+char			*read_chars(char *msg, t_select *sel)
 {
 	int		ret;
 
-	ret = read(0, msg, 4);
+	ret = read(sel->termfd, msg, 4);
 //	printf("ret %d\n", ret); important for key checking
 	if (ret >= 0)
 		msg[ret] = 0;
@@ -114,9 +114,9 @@ static t_select	*ft_select(t_select *sel)
 	while (!sel->status)
 	{
 		ft_bzero(c, 5);
-		read_chars(c);
-		ft_printf("READ  - ");
-		echo_bytes(c, 4);
+		read_chars(c, sel);
+//		ft_printf("READ  - ");//
+//		echo_bytes(c, 4);//
 		handle_input(sel, c);
 	}
 	return (sel);

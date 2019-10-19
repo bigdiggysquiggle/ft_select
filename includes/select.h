@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 16:39:42 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/15 15:34:13 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/19 08:46:17 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@
 */
 
 # define BS "\127"
-# define SPACE " "
+# define SPACE "\32"
 # define ESC "\e"
-# define ENTER "\10"
+# define ENTER "\13"
 
 t_sel_list		*make_list(int ac, char **av);
 t_select		*make_select(t_sel_list *options);
