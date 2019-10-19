@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/19 07:41:39 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/19 08:16:29 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@
 ** 'vi' to remove cursor 've' to make it normal'
 ** 'ti' for nonsequential cursor movement, 'te' for normal
 */
+
+void			echo_bytes(char *s, int len)
+{
+	int		i = 0;
+
+	while (i < len)
+		ft_printf("%d\t", s[i++]);
+	ft_printf("\n");
+}
 
 void			screen_save_clear(int mode, t_select *sel)
 {
@@ -37,15 +46,20 @@ void			screen_save_clear(int mode, t_select *sel)
 	}
 }
 
+/*
+** it's getting stuck here cuz it's stupid af
+*/
+
 char			*read_chars(char *msg)
 {
 	int		ret;
 
 	ret = read(0, msg, 4);
 //	printf("ret %d\n", ret); important for key checking
-	if (ret == -1)
+	if (ret >= 0)
+		msg[ret] = 0;
+	else
 		ft_bzero(msg, 4);
-	msg[ret] = 0;
 //	printf("at 4 %d\n", msg[ret]); important for key checking
 	return (msg);
 }
@@ -76,15 +90,33 @@ void			handle_input(t_select *sel, char *c)
 	add_colour(sel->options->sel ? REV_ULINE : ULINE, sel->options);
 }
 
+/*
+** UP    - 27	91	65	0
+** DOWN  - 27	91	66	0
+** LEFT  - 27	91	68	0
+** RIGHT - 27	91	67	0
+*/
+
 static t_select	*ft_select(t_select *sel)
 {
 	static char	c[5];
 
 	sel_signals();
 	print_opts(sel);
+//	ft_printf("UP    - ");
+//	echo_bytes(UP, 4);
+//	ft_printf("DOWN  - ");
+//	echo_bytes(DOWN, 4);
+//	ft_printf("LEFT  - ");
+//	echo_bytes(LEFT, 4);
+//	ft_printf("RIGHT - ");
+//	echo_bytes(RIGHT, 4);
 	while (!sel->status)
 	{
+		ft_bzero(c, 5);
 		read_chars(c);
+		ft_printf("READ  - ");
+		echo_bytes(c, 4);
 		handle_input(sel, c);
 	}
 	return (sel);

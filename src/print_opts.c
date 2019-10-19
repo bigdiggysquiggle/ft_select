@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:56:36 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/15 15:34:08 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/19 08:27:42 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ void	print_opts(t_select *sel)
 	t_sel_list	*list;
 	int			space;
 
+	ft_do_cap("cl");
 	space = columnize_opts(sel);
 	list = sel->options;
-	ft_do_cap("cl");
+//	ft_printf("padding: %d\n", space);//
 	if (list->sel)
 		ft_printf("%s%-*s%s", REV, space, list->option, NORM);
 	else
@@ -50,7 +51,14 @@ void	print_opts(t_select *sel)
 	ftgoto(0, 0);
 	sel->mcol = 0;
 	sel->mrow = 0;
-	add_colour(sel->options->sel ? REV_ULINE : ULINE, sel->options);
+//	ft_printf("%s", sel->options->sel ? REV_ULINE : ULINE);
+	ft_do_cap("us");
+	if (sel->options->sel)
+		ft_do_cap("mr");
+	ftgoto(sel->mcol + sel->options->len, 0);
+	ft_do_cap("ue");
+//	ft_printf("%s\n", NORM);
+//	add_colour(sel->options->sel ? REV_ULINE : ULINE, sel->options);
 }
 
 void	print_selected(t_select *sel)

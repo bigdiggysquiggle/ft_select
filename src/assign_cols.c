@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:13:55 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/15 15:14:33 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/19 08:12:21 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,16 @@ int			columnize_opts(t_select *sel)
 
 	len = 4;
 	count = 0;
-	opts = sel->options;
-	start = opts;
+	start = sel->options;
+	len = len_check_lmoa(len, start->len - 1);
+	opts = start->next;
 	while (opts != start)
 	{
 		count++;
 		len = len_check_lmoa(len, opts->len - 1);
 		opts = opts->next;
 	}
+//	ft_printf("%d\n", len);//
 	column_count(sel, len, count);
 	return (len);
 }
