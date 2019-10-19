@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 19:35:21 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/19 08:47:25 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/19 08:52:57 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_select			*make_select(t_sel_list *options)
 		sel->options = options;
 		sel->termios = &termios;
 		sel->old = &old;
-		sel->termfd = open(ttyname(0), O_RDWR | O_NOCTTY | O_NONBLOCK);
+		sel->termfd = open(ttyname(0), O_RDWR | /*O_NOCTTY | */O_NONBLOCK);
 		sel->status = 0;
 		return (sel);
 	}
