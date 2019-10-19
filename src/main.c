@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/15 15:15:41 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/19 07:41:39 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,10 @@
 
 void			screen_save_clear(int mode, t_select *sel)
 {
-	static char	buf[2048];
-
 	if (!mode)
 	{
-		ft_bzero(buf, 2048);
-		tgetent(buf, getenv("TERM"));
 		sel->termios->c_iflag &= ~(ECHO | ICANON);
-		tcsetattr(sel->termfd, TCSANOW, sel->termios);
+		tcsetattr(0, TCSANOW, sel->termios);
 		store_sel(sel);
 		ft_do_cap("cl");
 		ft_do_cap("ti");
@@ -36,7 +32,6 @@ void			screen_save_clear(int mode, t_select *sel)
 	}
 	else
 	{
-		tputs(buf, 1, selchar);
 		ft_do_cap("te");
 		ft_do_cap("ve");
 	}
@@ -99,6 +94,7 @@ int				main(int ac, char **av)
 {
 	t_select		*sel;
 	t_sel_list		*list;
+	static char		buf[2048];
 
 	sel = NULL;
 	if (!isatty(0))
@@ -107,13 +103,14 @@ int				main(int ac, char **av)
 	{
 		if ((sel = make_select(list)))
 		{
+			tgetent(buf, getenv("TERM"));
 			screen_save_clear(0, sel);
 			sel = ft_select(sel);
 		}
 	}
 	else
 		return (1);
-	tcsetattr(1, TCSANOW, sel->old);
+	tcsetattr(0, TCSANOW, sel->old);
 	screen_save_clear(1, sel);
 	print_selected(sel);
 	return (0);

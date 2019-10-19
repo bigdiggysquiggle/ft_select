@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 15:54:24 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/27 20:58:53 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/19 07:44:36 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,10 @@ void	sel_int(int sig)
 	if (sig)
 	{
 		sel = store_sel(0);
-		ft_dprintf(sel->termfd, "livin?\n");
 		tcsetattr(sel->termfd, TCSANOW, sel->old);
-		ft_dprintf(sel->termfd, "livin?\n");
 		screen_save_clear(1, sel);
-		ft_dprintf(sel->termfd, "livin?\n");
 		free_sel(sel);
-		ft_dprintf(sel->termfd, "livin?\n");
+		exit(1);
 	}
 }
 
