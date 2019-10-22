@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 16:39:42 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/19 08:46:17 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/22 11:32:42 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,7 @@ void			select_item(t_select *sel);
 void			move_hor(t_select *sel, t_sel_list *opt);
 void			move_ver(t_select *sel, int up);
 int				selchar(int c);
+
+void			print_assignment(t_sel_list *list);
 
 #endif

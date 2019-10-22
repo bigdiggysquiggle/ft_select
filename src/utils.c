@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 18:25:42 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/15 15:34:11 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/22 11:44:24 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,18 @@ int				selchar(int c)
 	sel = store_sel(0);
 	write(sel->termfd, &c, 1);
 	return (c);
+}
+
+
+void			print_assignment(t_sel_list *list)
+{
+	t_sel_list	*item;
+
+	ft_printf("%d x %d %s\n", list->row, list->col, list->option);
+	item = list->next;
+	while (item != list)
+	{
+		ft_printf("%d x %d %s\n", item->row, item->col, item->option);
+		item = item->next;
+	}
 }
