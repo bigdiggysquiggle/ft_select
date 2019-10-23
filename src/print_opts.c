@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:56:36 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/22 17:55:39 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/22 18:19:53 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	print_opts(t_select *sel)
 	while (list->col || list->row)
 		list = list->next;
 	space = columnize_opts(sel, list);
-	list = sel->options;
 //	ft_printf("padding: %d\n", space);//
 	print_item(list, space);
 	list = list->next;
