@@ -6,19 +6,11 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:56:36 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/23 13:13:10 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/23 15:07:13 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "select.h"
-
-void	add_colour(char *colour, t_sel_list *opts)
-{
-	ft_putstr(colour);
-	ftgoto(opts->col + opts->len, opts->row);
-	ft_putstr(NORM);
-	ftgoto(opts->col, opts->row);
-}
 
 /*
 ** print colours on redraw

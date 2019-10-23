@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 16:39:42 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/23 12:54:54 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/23 15:07:22 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void			ft_do_cap(char *cap);
 void			ftgoto(int col, int row);
 void			print_opts(t_select *sel);
 void			columnize_opts(t_select *sel);
-void			add_colour(char *colour, t_sel_list *opts);
 void			del_item(t_select *sel);
 void			select_item(t_select *sel);
 void			move_hor(t_select *sel, int left);
