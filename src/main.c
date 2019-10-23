@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/22 17:42:09 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/23 09:25:57 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void			screen_save_clear(int mode, t_select *sel)
 {
 	if (!mode)
 	{
-		sel->termios->c_iflag &= ~(ECHO | ICANON);
+		sel->termios->c_lflag &= ~(ECHO | ICANON);
 		tcsetattr(0, TCSANOW, sel->termios);
 		store_sel(sel);
 		ft_do_cap("cl");
