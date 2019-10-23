@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 20:48:15 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/08 18:40:41 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/22 17:41:26 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,36 +19,31 @@ void	del_item(t_select *sel)
 
 	prev = sel->options->prev;
 	next = sel->options->next;
-	free(sel->options->prev);
+	free(sel->options);
+	prev->next = next;
+	next->prev = prev;
+	next->sel |= 2;
+	sel->options = next;
 	print_opts(sel);
 }
 
 void	select_item(t_select *sel)
 {
-	int		select;
-
-	select = sel->options->sel;
-	if (select)
-	{
-		add_colour(ULINE, sel->options);
-		sel->options->sel = 0;
-	}
-	else
-	{
-		add_colour(REV_ULINE, sel->options);
-		sel->options->sel = 1;
-	}
-	// has to move to next item
+	sel->options->sel = sel->options->sel & 1 ? 0 : 1;
+	print_opts(sel);
 }
+
+/*
+** convert these two so they can find the currently selected item,
+** remove ul, move to next option, add ul
+*/
 
 void	move_hor(t_select *sel, t_sel_list *opt)
 {
-	add_colour(sel->options->sel ? REV : NORM, sel->options);
-	ftgoto(opt->col, opt->row);
+	sel->options->sel &= ~2;
+	opt->sel |= 2;
 	sel->options = opt;
-	sel->mcol = opt->col;
-	sel->mrow = opt->row;
-	add_colour(opt->sel ? REV_ULINE : ULINE, opt);
+	print_opts(sel);
 }
 
 void	move_ver(t_select *sel, int up)
@@ -56,13 +51,12 @@ void	move_ver(t_select *sel, int up)
 	int		move;
 
 	move = 0;
-	add_colour(sel->options->sel ? REV : NORM, sel->options);
+	sel->options->sel &= ~2;
 	while (move < sel->col_count)
 	{
 		sel->options = up ? sel->options->prev : sel->options->next;
-		ftgoto(sel->options->col, sel->options->row);
+		move++;
 	}
-	sel->mcol = sel->options->col;
-	sel->mrow = sel->options->row;
-	add_colour(sel->options->sel ? REV_ULINE : ULINE, sel->options);
+	sel->options->sel |= 2;
+	print_opts(sel);
 }

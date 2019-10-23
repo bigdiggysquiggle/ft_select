@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/19 08:48:09 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/22 17:42:09 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void			handle_input(t_select *sel, char *c)
 //	while (c[i]) important for key checking
 //		printf("%d\n", c[i++]);	important for key checking
 //	printf("--------\n"); important for key checking
-	add_colour(sel->options->sel ? REV : NORM, sel->options);
 	if (ft_strequ(SPACE, c))
 		select_item(sel);
 	if (ft_strequ(LEFT, c))
@@ -87,7 +86,6 @@ void			handle_input(t_select *sel, char *c)
 		sel->status = 2;
 	if (ft_strequ(ENTER, c))
 		sel->status = 1;
-	add_colour(sel->options->sel ? REV_ULINE : ULINE, sel->options);
 }
 
 /*
@@ -102,6 +100,7 @@ static t_select	*ft_select(t_select *sel)
 	static char	c[5];
 
 	sel_signals();
+	sel->options->sel |= 2;
 	print_opts(sel);
 //	ft_printf("UP    - ");
 //	echo_bytes(UP, 4);

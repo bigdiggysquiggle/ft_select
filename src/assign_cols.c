@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:13:55 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/22 12:43:09 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/22 17:54:24 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,29 +43,29 @@ void		assign_every_i(t_sel_list *first, t_sel_list *opts, int *data)
 	}
 }
 
-void		assign_pos(t_select *sel, int cols, int len, int x)
+int			assign_pos(t_sel_list *list, int cols, int len, int x)
 {
 	t_sel_list	*opts;
 	int			counter;
 	int			data[3];
 
 	data[1] = len;
-	opts = sel->options;
+	opts = list;
 	counter = 1;
-	sel->col_count = cols;
 //	ft_printf("count %d\n", cols);//
 	cols = x ? cols + 1 : cols;
 	data[0] = cols;
 	while (counter <= cols)
 	{
 		data[2] = counter - 1;
-		assign_every_i(sel->options, opts, data);
+		assign_every_i(list, opts, data);
 		opts = opts->next;
 		counter++;
 	}
+	return (cols);
 }
 
-void		column_count(t_select *sel, int len)
+int			column_count(t_sel_list *sel, int len)
 {
 	struct winsize	ws;
 	int				size;
@@ -78,7 +78,7 @@ void		column_count(t_select *sel, int len)
 	if (size > len)
 		cols = size / len;
 //	ft_printf("columns %d\n", cols);//
-	assign_pos(sel, cols, len, size % len);
+	return (assign_pos(sel, cols, len, size % len));
 }
 
 int			len_check_lmoa(int len, int cmp)
@@ -88,21 +88,21 @@ int			len_check_lmoa(int len, int cmp)
 	return (len);
 }
 
-int			columnize_opts(t_select *sel)
+int			columnize_opts(t_select *sel, t_sel_list *list)
 {
 	t_sel_list	*opts;
 	int			len;
 
 	len = 4;
-	len = len_check_lmoa(len, sel->options->len - 1);
-	opts = sel->options->next;
+	len = len_check_lmoa(len, list->len - 1);
+	opts = list->next;
 	while (opts != sel->options)
 	{
 		len = len_check_lmoa(len, opts->len - 1);
 		opts = opts->next;
 	}
 //	ft_printf("%d\n", len);//
-	column_count(sel, len);
+	sel->col_count = column_count(list, len);
 //	print_assignment(sel->options);//
 	return (len);
 }

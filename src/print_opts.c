@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:56:36 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/19 08:27:42 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/22 17:55:39 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,39 +24,48 @@ void	add_colour(char *colour, t_sel_list *opts)
 ** print colours on redraw
 */
 
+void	print_item(t_sel_list *list, int space)
+{
+	if (list->sel & 1)
+		ft_printf("%s", REV);
+	if (list->sel & 2)
+		ft_printf("%s", ULINE);
+	ft_printf("%s", list->option);
+	if (list->sel)
+		ft_printf("%s", NORM);
+	ft_printf("%-*c", space, 0);
+}
+
 void	print_opts(t_select *sel)
 {
 	t_sel_list	*list;
 	int			space;
 
 	ft_do_cap("cl");
-	space = columnize_opts(sel);
+	list = sel->options;
+	while (list->col || list->row)
+		list = list->next;
+	space = columnize_opts(sel, list);
 	list = sel->options;
 //	ft_printf("padding: %d\n", space);//
-	if (list->sel)
-		ft_printf("%s%-*s%s", REV, space, list->option, NORM);
-	else
-		ft_printf("%-*s", space, list->option);
+	print_item(list, space);
 	list = list->next;
 	while (list != sel->options)
 	{
-		if (list->sel)
-			ft_printf("%s%-*s%s", REV, space, list->option, NORM);
-		else
-			ft_printf("%-*s", space, list->option);
+		print_item(list, space);
 		list = list->next;
 		if (!list->col)
 			ft_printf("\n");
 	}
-	ftgoto(0, 0);
-	sel->mcol = 0;
-	sel->mrow = 0;
+//	ftgoto(0, 0);
+//	sel->mcol = 0;
+//	sel->mrow = 0;
 //	ft_printf("%s", sel->options->sel ? REV_ULINE : ULINE);
-	ft_do_cap("us");
-	if (sel->options->sel)
-		ft_do_cap("mr");
-	ftgoto(sel->mcol + sel->options->len, 0);
-	ft_do_cap("ue");
+//	ft_do_cap("us");
+//	if (sel->options->sel)
+//		ft_do_cap("mr");
+//	ftgoto(sel->mcol + sel->options->len, 0);
+//	ft_do_cap("ue");
 //	ft_printf("%s\n", NORM);
 //	add_colour(sel->options->sel ? REV_ULINE : ULINE, sel->options);
 }
