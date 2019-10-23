@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 19:35:21 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/23 10:18:29 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/23 11:12:53 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,7 @@ t_select			*make_select(t_sel_list *options)
 	if ((sel = (t_select *)malloc(sizeof(t_select))) && !tcgetattr(0, &termios))
 	{
 		ft_memcpy(&old, &termios, sizeof(struct termios));
-		sel->mcol = 0;
-		sel->mrow = 0;
+		sel->first = options;
 		sel->options = options;
 		sel->termios = &termios;
 		sel->old = &old;

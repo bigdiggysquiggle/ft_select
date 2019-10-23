@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/23 09:25:57 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/23 13:07:30 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,6 @@
 ** 'vi' to remove cursor 've' to make it normal'
 ** 'ti' for nonsequential cursor movement, 'te' for normal
 */
-
-void			echo_bytes(char *s, int len)
-{
-	int		i = 0;
-
-	while (i < len)
-		ft_printf("%d\t", s[i++]);
-	ft_printf("\n");
-}
 
 void			screen_save_clear(int mode, t_select *sel)
 {
@@ -73,9 +64,9 @@ void			handle_input(t_select *sel, char *c)
 	if (ft_strequ(SPACE, c))
 		select_item(sel);
 	if (ft_strequ(LEFT, c))
-		move_hor(sel, sel->options->prev);
+		move_hor(sel, 1);
 	if (ft_strequ(RIGHT, c))
-		move_hor(sel, sel->options->next);
+		move_hor(sel, 0);
 	if (ft_strequ(UP, c))
 		move_ver(sel, 1);
 	if (ft_strequ(DOWN, c))
@@ -100,7 +91,6 @@ static t_select	*ft_select(t_select *sel)
 	static char	c[5];
 
 	sel_signals();
-	sel->options->sel |= 2;
 	print_opts(sel);
 //	ft_printf("UP    - ");
 //	echo_bytes(UP, 4);

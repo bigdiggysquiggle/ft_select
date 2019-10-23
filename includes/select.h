@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 16:39:42 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/22 17:53:56 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/23 12:54:54 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@
 # define DEL "\e[3~"
 
 /*
-** \127 is also ascii value 8 apparently
+** \127 is also ascii value 8 allegedly
 */
 
 # define BS "\127"
-# define SPACE "\32"
+# define SPACE " " //"\32" just in case I need it
 # define ESC "\e"
-# define ENTER "\13"
+# define ENTER "\n" //"\13" just in case I need it
 
 t_sel_list		*make_list(int ac, char **av);
 t_select		*make_select(t_sel_list *options);
@@ -47,13 +47,14 @@ void			print_selected(t_select *sel);
 void			ft_do_cap(char *cap);
 void			ftgoto(int col, int row);
 void			print_opts(t_select *sel);
-int				columnize_opts(t_select *sel, t_sel_list *list);
+void			columnize_opts(t_select *sel);
 void			add_colour(char *colour, t_sel_list *opts);
 void			del_item(t_select *sel);
 void			select_item(t_select *sel);
-void			move_hor(t_select *sel, t_sel_list *opt);
+void			move_hor(t_select *sel, int left);
 void			move_ver(t_select *sel, int up);
 int				selchar(int c);
+int				sel_list_len(t_sel_list *sel);
 
 void			print_assignment(t_sel_list *list);
 

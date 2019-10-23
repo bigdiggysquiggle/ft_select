@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 15:54:24 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/19 07:44:36 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/23 13:19:21 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void	win_resize(int sig)
 	{
 		ft_do_cap("cl");
 		sel = store_sel(NULL);
-		while (sel->options->col != 0 && sel->options->row != 0)
-			sel->options = sel->options->next;
 		print_opts(sel);
 	}
 }
