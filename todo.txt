@@ -6,3 +6,11 @@ Ctrl+Z=SIGTSTP
 
 cs........string+...Change scrolling region (DEC VT100 only); resembles cm
 cv........string+...Vertical cursor motion
+
+s to search a string
+
+header with controls printed in it
+
+fancy colours
+
+secret squirrel ;)

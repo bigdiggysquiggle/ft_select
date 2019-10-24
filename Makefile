@@ -6,7 +6,7 @@
 #    By: dromansk <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/28 21:18:25 by dromansk          #+#    #+#              #
-#    Updated: 2019/10/23 15:16:58 by dromansk         ###   ########.fr        #
+#    Updated: 2019/10/23 18:28:50 by dromansk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,11 @@ sre: fclean
 
 sreclean: sre
 	make clean
+
+fre: fclean
+	make -C ./libft reclean
+	gcc -fsanitize=address -Wall -Werror -Wextra $(I) -c $(SRCS)
+	gcc -fsanitize=address -Wall -Werror -Wextra $(I) -o $(NAME) $(O) $(L) -ltermcap
 
 test: clean
 	gcc -Wall -Werror -Wextra -c $(I) $(SRCS) 

@@ -6,15 +6,11 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 19:35:21 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/23 11:12:53 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/24 14:11:04 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "select.h"
-
-/*
-** possibility that argv items would get erased under larger memory loads
-*/
 
 t_select			*store_sel(t_select *sel)
 {
@@ -82,8 +78,9 @@ t_select			*make_select(t_sel_list *options)
 		sel->first = options;
 		sel->options = options;
 		sel->termios = &termios;
+		sel->len = sel_list_len(options);
 		sel->old = &old;
-		sel->termfd = open(ttyname(0), O_RDWR/* | O_NOCTTY | O_NONBLOCK*/);
+		sel->termfd = open(ttyname(0), O_RDWR);
 		sel->status = 0;
 		return (sel);
 	}
@@ -98,13 +95,17 @@ void				free_sel(t_select *sel)
 {
 	t_sel_list	*tmp;
 
-	tmp = sel->options->next->next;
-	while (tmp != sel->options)
+	if (sel->options)
 	{
-		free(tmp->prev);
-		tmp = tmp->next;
+		tmp = sel->options->next->next;
+		while (tmp != sel->options)
+		{
+			free(tmp->prev);
+			tmp = tmp->next;
+		}
+		if (tmp->prev != tmp)
+			free(tmp->prev);
+		free(tmp);
 	}
-	free(tmp->prev);
-	free(tmp);
 	free(sel);
 }

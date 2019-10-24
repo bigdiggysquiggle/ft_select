@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 20:48:15 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/23 13:17:57 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/24 14:12:46 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,21 @@ void	del_item(t_select *sel)
 	prev = sel->options->prev;
 	next = sel->options->next;
 	free(sel->options);
-	prev->next = next;
-	next->prev = prev;
-	sel->options = next;
-	print_opts(sel);
+	if (next == prev)
+	{
+		sel->first = NULL;
+		sel->options = NULL;
+		sel->status = 2;
+	}
+	else
+	{
+		prev->next = next;
+		next->prev = prev;
+		if (sel->options == sel->first)
+			sel->first = next;
+		sel->options = next;
+		print_opts(sel);
+	}
 }
 
 void	select_item(t_select *sel)
@@ -40,13 +51,11 @@ void	move_hor(t_select *sel, int left)
 
 void	move_ver(t_select *sel, int up)
 {
-	int		move;
+	int		pos;
 
-	move = 0;
-	while (move <= sel->col_count)
-	{
+	pos = sel->options->col;
+	sel->options = up ? sel->options->prev : sel->options->next;
+	while (sel->options->col != pos)
 		sel->options = up ? sel->options->prev : sel->options->next;
-		move++;
-	}
 	print_opts(sel);
 }

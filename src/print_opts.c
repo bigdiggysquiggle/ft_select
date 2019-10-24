@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:56:36 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/23 15:07:13 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/24 14:13:15 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,12 @@ void	print_opts(t_select *sel)
 
 	ft_do_cap("cl");
 	columnize_opts(sel);
+	if (sel->col_count < 0)
+	{
+		ft_printf("Window tooo smoll :(");
+		return ;
+	}
 	list = sel->first;
-//	ft_printf("padding: %d\n", space);//
 	print_item(list, list == sel->options);
 	list = list->next;
 	while (list != sel->first)

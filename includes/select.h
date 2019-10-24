@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 16:39:42 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/23 15:07:22 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/24 14:11:32 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,10 @@
 # define RIGHT "\e[C"
 # define LEFT "\e[D"
 # define DEL "\e[3~"
-
-/*
-** \127 is also ascii value 8 allegedly
-*/
-
-# define BS "\127"
-# define SPACE " " //"\32" just in case I need it
+# define BS "\x7f"
+# define SPACE " "
 # define ESC "\e"
-# define ENTER "\n" //"\13" just in case I need it
+# define ENTER "\n"
 
 t_sel_list		*make_list(int ac, char **av);
 t_select		*make_select(t_sel_list *options);
@@ -56,5 +51,6 @@ int				selchar(int c);
 int				sel_list_len(t_sel_list *sel);
 
 void			print_assignment(t_sel_list *list);
+void			echo_bytes(char *s, int len);
 
 #endif

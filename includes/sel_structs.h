@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 19:20:23 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/23 11:20:32 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/23 19:25:39 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ struct	s_select
 	int				col_count;
 	t_sel_list		*first;
 	t_sel_list		*options;
+	int				len;
 	struct termios	*termios;
 	struct termios	*old;
 	int				termfd;
