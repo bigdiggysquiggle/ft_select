@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:56:36 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 00:19:13 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 00:40:50 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	print_opts(t_select *sel)
 	t_sel_list	*list;
 
 	ft_do_cap("cl");
-//	ft_dprintf(STDIN_FILENO, "columnize %d\n", sel_list_len(sel->first));//
 	columnize_opts(sel);
 	if (sel->col_count < 0)
 	{
@@ -68,7 +67,7 @@ void	print_selected(t_select *sel)
 		{
 			if (list->sel)
 			{
-				ft_dprintf(STDOUT_FILENO,  flag ? " %s" : "%s", list->option);
+				ft_dprintf(STDOUT_FILENO, flag ? " %s" : "%s", list->option);
 				flag = 1;
 			}
 			list = list->next;
