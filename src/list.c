@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 19:35:21 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 00:41:09 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 02:41:25 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ t_select			*make_select(t_sel_list *options)
 		sel->len = sel_list_len(options);
 		sel->old = &old;
 		sel->status = 0;
+		sel->ws = (struct winsize *)malloc(sizeof(struct winsize));
 		return (sel);
 	}
 	else if (!sel)
@@ -107,5 +108,6 @@ void				free_sel(t_select *sel)
 			free(tmp->prev);
 		free(tmp);
 	}
+	free(sel->ws);
 	free(sel);
 }

@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 20:48:15 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 01:07:56 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 01:40:43 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,21 @@ void	del_item(t_select *sel)
 void	select_item(t_select *sel)
 {
 	sel->options->sel = sel->options->sel ? 0 : 1;
+	print_opts(sel);
+}
+
+void	invert_selection(t_select *sel)
+{
+	t_sel_list	*list;
+
+	list = sel->first;
+	list->sel = list->sel == 0;
+	list = list->next;
+	while (list != sel->first)
+	{
+		list->sel = list->sel == 0;
+		list = list->next;
+	}
 	print_opts(sel);
 }
 

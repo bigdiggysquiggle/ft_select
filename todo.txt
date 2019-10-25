@@ -1,16 +1,12 @@
-look into how tgets and tputs really work, make sure you're actually saving and restoring properly
-
 Ctrl+C=SIGINT
 Ctrl+\=SIGQUIT
 Ctrl+Z=SIGTSTP
 
-cs........string+...Change scrolling region (DEC VT100 only); resembles cm
-cv........string+...Vertical cursor motion
-
 s to search a string
 
 header with controls printed in it
+	arrows to move, space select, del/bs delete, esc exit no print,
+	enter exit print, i invert selection, a select all, d deselect all,
+	s secret squirrel
 
 fancy colours
-
-secret squirrel ;)

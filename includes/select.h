@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 16:39:42 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 01:28:07 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 02:37:45 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ void			del_item(t_select *sel);
 void			select_item(t_select *sel);
 void			move_hor(t_select *sel, int left);
 void			move_ver(t_select *sel, int up);
+void			invert_selection(t_select *sel);
+void			select_all(t_select *sel, int mode);
+void			secret(t_select *sel);
 int				selchar(int c);
 int				sel_list_len(t_sel_list *sel);
 

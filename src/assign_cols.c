@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:13:55 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 01:26:24 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 02:37:26 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 static int	assign_pos(t_select *start, int len)
 {
-	struct winsize	ws;
 	int				row;
 	int				width;
 	t_sel_list		*list;
 
-	ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
+	ioctl(STDIN_FILENO, TIOCGWINSZ, start->ws);
 	width = 0;
 	row = HEAD_PAD;
 	start->first->col = 0;
@@ -28,7 +27,7 @@ static int	assign_pos(t_select *start, int len)
 	while (list != start->first)
 	{
 		width += len;
-		if (width + len > ws.ws_col)
+		if (width + len > start->ws->ws_col)
 		{
 			row++;
 			width = 0;
@@ -37,8 +36,9 @@ static int	assign_pos(t_select *start, int len)
 		list->row = row;
 		list = list->next;
 	}
-	return (len > ws.ws_col || start->first->prev->row + 2 > ws.ws_row ?
-			-(ws.ws_col / 2) : ws.ws_col / len);
+	return (len > start->ws->ws_col ||
+			start->first->prev->row + 2 > start->ws->ws_row ?
+			-(start->ws->ws_col / 2) : start->ws->ws_col / len);
 }
 
 static int	len_check_lmoa(int len, int cmp)
