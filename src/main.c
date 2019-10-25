@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/24 14:10:35 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/24 21:17:53 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void			screen_save_clear(int mode, t_select *sel)
 	{
 		ft_do_cap("te");
 		ft_do_cap("ve");
+		tcsetattr(0, TCSANOW, sel->old);
 	}
 }
 
@@ -97,7 +98,6 @@ int				main(int ac, char **av)
 	}
 	else
 		return (1);
-	tcsetattr(0, TCSANOW, sel->old);
 	screen_save_clear(1, sel);
 	print_selected(sel);
 	return (0);
