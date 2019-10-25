@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 20:48:15 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/24 14:12:46 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 01:07:56 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@ void	del_item(t_select *sel)
 {
 	t_sel_list	*prev;
 	t_sel_list	*next;
+	t_sel_list	*rm;
 
-	prev = sel->options->prev;
-	next = sel->options->next;
-	free(sel->options);
-	if (next == prev)
+	rm = sel->options;
+	prev = rm->prev;
+	next = rm->next;
+	if (next == next->next)
 	{
 		sel->first = NULL;
 		sel->options = NULL;
@@ -30,11 +31,12 @@ void	del_item(t_select *sel)
 	{
 		prev->next = next;
 		next->prev = prev;
-		if (sel->options == sel->first)
+		sel->options = rm->next == sel->first ? prev : next;
+		if (rm == sel->first)
 			sel->first = next;
-		sel->options = next;
 		print_opts(sel);
 	}
+	free(rm);
 }
 
 void	select_item(t_select *sel)

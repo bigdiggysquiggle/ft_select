@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:13:55 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 00:45:26 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 00:59:50 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void		columnize_opts(t_select *sel)
 
 	len = 2;
 	opts = sel->first;
-	len = len_check_lmoa(len, opts->len);
+	len = len_check_lmoa(len, opts->len + 1);
 	opts = opts->next;
 	while (opts != sel->first)
 	{
