@@ -2,6 +2,8 @@ Ctrl+C=SIGINT
 Ctrl+\=SIGQUIT
 Ctrl+Z=SIGTSTP
 
+verify that empty env is no p
+
 s to search a string
 
 header with controls printed in it
