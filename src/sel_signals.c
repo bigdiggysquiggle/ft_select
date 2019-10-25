@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 15:54:24 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/24 22:17:51 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 00:19:43 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	sel_int(int sig)
 	if (sig)
 	{
 		sel = store_sel(0);
-		tcsetattr(sel->termfd, TCSANOW, sel->old);
+		tcsetattr(STDIN_FILENO, TCSANOW, sel->old);
 		screen_save_clear(1, sel);
 		free_sel(sel);
 		exit(1);

@@ -1,0 +1,49 @@
+assign_cols.c:57:	opts = sel->first;
+assign_cols.c:60:	while (opts != sel->first)
+assign_cols.c:65:	sel->col_count = assign_pos(sel, len);
+debug.c:23:		ft_dprintf(sel->termfd, "%d\t", s[i++]);
+debug.c:24:	ft_dprintf(sel->termfd, "\n");
+list.c:78:		sel->first = options;
+list.c:79:		sel->options = options;
+list.c:80:		sel->termios = &termios;
+list.c:81:		sel->len = sel_list_len(options);
+list.c:82:		sel->old = &old;
+list.c:83:		sel->termfd = open(ttyname(0), O_RDWR);
+list.c:84:		sel->status = 0;
+list.c:98:	if (sel->options)
+list.c:100:		tmp = sel->options->next->next;
+list.c:101:		while (tmp != sel->options)
+main.c:19:		sel->termios->c_lflag &= ~(ECHO | ICANON);
+main.c:20:		tcsetattr(sel->termfd, TCSANOW, sel->termios);
+main.c:30:		tcsetattr(sel->termfd, TCSANOW, sel->old);
+main.c:38:	ret = read(sel->termfd, msg, 4);
+main.c:61:		sel->status = 2;
+main.c:63:		sel->status = 1;
+main.c:72:	while (!sel->status)
+print_opts.c:35://	ft_dprintf(sel->termfd, "columnize %d\n", sel_list_len(sel->first));//
+print_opts.c:37:	if (sel->col_count < 0)
+print_opts.c:42:	list = sel->first;
+print_opts.c:43:	print_item(list, list == sel->options);
+print_opts.c:45:	while (list != sel->first)
+print_opts.c:47:		print_item(list, list == sel->options);
+print_opts.c:58:	if (sel->status % 2)
+print_opts.c:60:		list = sel->first;
+print_opts.c:67:		while (list != sel->first)
+sel_signals.c:35:		tcsetattr(sel->termfd, TCSANOW, sel->old);
+selection.c:20:	prev = sel->options->prev;
+selection.c:21:	next = sel->options->next;
+selection.c:22:	free(sel->options);
+selection.c:25:		sel->first = NULL;
+selection.c:26:		sel->options = NULL;
+selection.c:27:		sel->status = 2;
+selection.c:33:		if (sel->options == sel->first)
+selection.c:34:			sel->first = next;
+selection.c:35:		sel->options = next;
+selection.c:42:	sel->options->sel = sel->options->sel ? 0 : 1;
+selection.c:48:	sel->options = left ? sel->options->prev : sel->options->next;
+selection.c:56:	pos = sel->options->col;
+selection.c:57:	sel->options = up ? sel->options->prev : sel->options->next;
+selection.c:58:	while (sel->options->col != pos)
+selection.c:59:		sel->options = up ? sel->options->prev : sel->options->next;
+utils.c:37:	write(sel->termfd, &c, 1);
+utils.c:47:	curr = sel->next;

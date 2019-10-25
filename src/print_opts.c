@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:56:36 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/24 22:33:37 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 00:19:13 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void	print_item(t_sel_list *list, int ul)
 {
 	ftgoto(list->col, list->row);
 	if (list->sel)
-		ft_dprintf(0, "%s", REV);
+		ft_dprintf(STDIN_FILENO, "%s", REV);
 	if (ul)
-		ft_dprintf(0, "%s", ULINE);
-	ft_dprintf(0, "%s", list->option);
-	ft_dprintf(0, "%s", NORM);
+		ft_dprintf(STDIN_FILENO, "%s", ULINE);
+	ft_dprintf(STDIN_FILENO, "%s", list->option);
+	ft_dprintf(STDIN_FILENO, "%s", NORM);
 }
 
 void	print_opts(t_select *sel)
@@ -32,10 +32,11 @@ void	print_opts(t_select *sel)
 	t_sel_list	*list;
 
 	ft_do_cap("cl");
+//	ft_dprintf(STDIN_FILENO, "columnize %d\n", sel_list_len(sel->first));//
 	columnize_opts(sel);
 	if (sel->col_count < 0)
 	{
-		ft_printf("Window tooo smoll :(");
+		ft_dprintf(STDERR_FILENO, "Window tooo smoll :(");
 		return ;
 	}
 	list = sel->first;
@@ -45,8 +46,6 @@ void	print_opts(t_select *sel)
 	{
 		print_item(list, list == sel->options);
 		list = list->next;
-		if (!list->col)
-			ft_printf("\n");
 	}
 }
 
@@ -61,7 +60,7 @@ void	print_selected(t_select *sel)
 		list = sel->first;
 		if (list->sel)
 		{
-			ft_putstr(list->option);
+			ft_putstr_fd(list->option, STDOUT_FILENO);
 			flag = 1;
 		}
 		list = list->next;
@@ -69,7 +68,7 @@ void	print_selected(t_select *sel)
 		{
 			if (list->sel)
 			{
-				ft_printf(flag ? " %s" : "%s", list->option);
+				ft_dprintf(STDOUT_FILENO,  flag ? " %s" : "%s", list->option);
 				flag = 1;
 			}
 			list = list->next;

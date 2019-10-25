@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 16:39:42 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/24 21:43:27 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/24 23:59:33 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void			move_ver(t_select *sel, int up);
 int				selchar(int c);
 int				sel_list_len(t_sel_list *sel);
 
-void			print_assignment(t_sel_list *list);
+void			print_assignment(t_select *list);
 void			echo_bytes(char *s, int len);
 
 #endif

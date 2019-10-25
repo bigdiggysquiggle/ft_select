@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 19:35:21 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/24 14:11:04 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 00:17:41 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,13 @@ t_select			*make_select(t_sel_list *options)
 		sel->termios = &termios;
 		sel->len = sel_list_len(options);
 		sel->old = &old;
-		sel->termfd = open(ttyname(0), O_RDWR);
 		sel->status = 0;
 		return (sel);
 	}
 	else if (!sel)
-		ft_printf("Error: failed to generate selection list.\n");
+		ft_dprintf(STDERR_FILENO, "Error: failed to generate selection list.\n");
 	else
-		ft_printf("Error: Couldn't get terminal attributes\n");
+		ft_dprintf(STDERR_FILENO, "Error: Couldn't get terminal attributes\n");
 	return (NULL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/24 21:17:53 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 00:22:18 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void			screen_save_clear(int mode, t_select *sel)
 	if (!mode)
 	{
 		sel->termios->c_lflag &= ~(ECHO | ICANON);
-		tcsetattr(0, TCSANOW, sel->termios);
+		tcsetattr(STDIN_FILENO, TCSANOW, sel->termios);
 		store_sel(sel);
 		ft_do_cap("cl");
 		ft_do_cap("ti");
@@ -27,15 +27,15 @@ void			screen_save_clear(int mode, t_select *sel)
 	{
 		ft_do_cap("te");
 		ft_do_cap("ve");
-		tcsetattr(0, TCSANOW, sel->old);
+		tcsetattr(STDIN_FILENO, TCSANOW, sel->old);
 	}
 }
 
-char			*read_chars(char *msg, t_select *sel)
+char			*read_chars(char *msg)
 {
 	int		ret;
 
-	ret = read(sel->termfd, msg, 4);
+	ret = read(STDIN_FILENO, msg, 4);
 	if (ret >= 0)
 		msg[ret] = 0;
 	else
@@ -72,7 +72,7 @@ static t_select	*ft_select(t_select *sel)
 	while (!sel->status)
 	{
 		ft_bzero(c, 5);
-		read_chars(c, sel);
+		read_chars(c);
 		handle_input(sel, c);
 	}
 	return (sel);
@@ -85,8 +85,8 @@ int				main(int ac, char **av)
 	static char		buf[2048];
 
 	sel = NULL;
-	if (!isatty(0))
-		ft_printf("Error: Not a tty\n");
+	if (!isatty(STDIN_FILENO))
+		ft_dprintf(STDERR_FILENO, "Error: Not a tty\n");
 	else if ((list = make_list(ac, av)))
 	{
 		if ((sel = make_select(list)))

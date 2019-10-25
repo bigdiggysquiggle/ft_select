@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 18:25:42 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/23 19:25:43 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 00:20:56 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ void			ftgoto(int col, int row)
 
 int				selchar(int c)
 {
-	t_select	*sel;
-
-	sel = store_sel(0);
-	write(sel->termfd, &c, 1);
+	write(STDIN_FILENO, &c, 1);
 	return (c);
 }
 
