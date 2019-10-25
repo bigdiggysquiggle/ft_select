@@ -6,13 +6,13 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:13:55 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 00:13:31 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 00:45:26 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "select.h"
 
-int			assign_pos(t_select *start, int len)
+static int	assign_pos(t_select *start, int len)
 {
 	struct winsize	ws;
 	int				row;
@@ -41,7 +41,7 @@ int			assign_pos(t_select *start, int len)
 			: ws.ws_col / len);
 }
 
-int			len_check_lmoa(int len, int cmp)
+static int	len_check_lmoa(int len, int cmp)
 {
 	while (cmp >= len)
 		len += 2;

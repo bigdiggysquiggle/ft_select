@@ -6,13 +6,13 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 15:54:24 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 00:19:43 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 00:48:57 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "select.h"
 
-void	win_resize(int sig)
+static void	win_resize(int sig)
 {
 	t_select	*sel;
 
@@ -25,7 +25,7 @@ void	win_resize(int sig)
 	}
 }
 
-void	sel_int(int sig)
+static void	sel_int(int sig)
 {
 	t_select	*sel;
 
@@ -39,7 +39,7 @@ void	sel_int(int sig)
 	}
 }
 
-void	sel_stop(int sig)
+static void	sel_stop(int sig)
 {
 	t_select	*sel;
 
@@ -52,7 +52,7 @@ void	sel_stop(int sig)
 	}
 }
 
-void	sel_cont(int sig)
+static void	sel_cont(int sig)
 {
 	t_select	*sel;
 
@@ -67,7 +67,7 @@ void	sel_cont(int sig)
 	}
 }
 
-void	sel_signals(void)
+void		sel_signals(void)
 {
 	signal(SIGWINCH, win_resize);
 	signal(SIGINT, sel_int);

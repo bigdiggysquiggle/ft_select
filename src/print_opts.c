@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:56:36 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 00:40:50 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 00:47:54 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** print colours on redraw
 */
 
-void	print_item(t_sel_list *list, int ul)
+static void	print_item(t_sel_list *list, int ul)
 {
 	ftgoto(list->col, list->row);
 	if (list->sel)
@@ -27,7 +27,7 @@ void	print_item(t_sel_list *list, int ul)
 	ft_dprintf(STDIN_FILENO, "%s", NORM);
 }
 
-void	print_opts(t_select *sel)
+void		print_opts(t_select *sel)
 {
 	t_sel_list	*list;
 
@@ -48,7 +48,7 @@ void	print_opts(t_select *sel)
 	}
 }
 
-void	print_selected(t_select *sel)
+void		print_selected(t_select *sel)
 {
 	t_sel_list	*list;
 	int			flag;

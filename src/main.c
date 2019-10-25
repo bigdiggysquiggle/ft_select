@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 00:22:18 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 00:47:10 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void			screen_save_clear(int mode, t_select *sel)
 	}
 }
 
-char			*read_chars(char *msg)
+static char		*read_chars(char *msg)
 {
 	int		ret;
 
@@ -43,7 +43,7 @@ char			*read_chars(char *msg)
 	return (msg);
 }
 
-void			handle_input(t_select *sel, char *c)
+static void		handle_input(t_select *sel, char *c)
 {
 	if (ft_strequ(SPACE, c))
 		select_item(sel);
