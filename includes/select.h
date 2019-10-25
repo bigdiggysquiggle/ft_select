@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 16:39:42 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/24 23:59:33 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 01:28:07 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define SPACE " "
 # define ESC "\e"
 # define ENTER "\n"
+# define HEAD_PAD 0
 
 t_sel_list		*make_list(int ac, char **av);
 t_select		*make_select(t_sel_list *options);

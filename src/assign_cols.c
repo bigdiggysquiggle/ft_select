@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:13:55 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 00:59:50 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 01:26:24 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static int	assign_pos(t_select *start, int len)
 
 	ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
 	width = 0;
-	row = 0;
+	row = HEAD_PAD;
 	start->first->col = 0;
-	start->first->row = 0;
+	start->first->row = HEAD_PAD;
 	list = start->first->next;
 	while (list != start->first)
 	{
@@ -37,8 +37,8 @@ static int	assign_pos(t_select *start, int len)
 		list->row = row;
 		list = list->next;
 	}
-	return (len > ws.ws_col || start->first->prev->row + 2 > ws.ws_row ? -1
-			: ws.ws_col / len);
+	return (len > ws.ws_col || start->first->prev->row + 2 > ws.ws_row ?
+			-(ws.ws_col / 2) : ws.ws_col / len);
 }
 
 static int	len_check_lmoa(int len, int cmp)
