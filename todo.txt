@@ -1,3 +1,5 @@
 verify that empty env is no p
 
 fancy colours
+
+env -i ./ft_select *
