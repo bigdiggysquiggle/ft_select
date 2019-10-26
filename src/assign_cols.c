@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:13:55 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 21:35:21 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 22:12:59 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	assign_pos(t_select *start, int len)
 		list = list->next;
 	}
 	return (len > start->ws->ws_col ||
-			start->first->prev->row + 2 > start->ws->ws_row ?
+			start->first->prev->row + 4 > start->ws->ws_row ?
 			-(start->ws->ws_col / 2) : start->ws->ws_col / len);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 19:36:29 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 21:39:42 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 22:12:50 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void		print_help(t_select *sel)
 	tab[4] = "Del/Backspace: remove item";
 	tab[5] = "Enter: quit, print selection";
 	tab[6] = "Esc: quit without printing";
-	tab[7] = "H: help";
 	tab[CONTROLS - 1] = "S: secret ;)";
 	tab[CONTROLS] = NULL;
 	construct_window(sel, tab);

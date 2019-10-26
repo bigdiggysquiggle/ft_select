@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:56:36 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 21:38:58 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 22:15:18 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void		print_opts(t_select *sel)
 		print_item(list, list == sel->options);
 		list = list->next;
 	}
+	ftgoto(0, list->prev->row + 2);
+	ft_putstr_fd("H: print help", STDERR_FILENO);
 }
 
 void		print_selected(t_select *sel)

@@ -6,11 +6,30 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 18:25:42 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 00:20:56 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 22:10:08 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "select.h"
+
+void			error_checks(void)
+{
+	int		ret;
+	char	buf[2048];
+
+	if (!isatty(STDIN_FILENO))
+	{
+		ft_dprintf(STDERR_FILENO, "Error: Not a tty");
+		exit(1);
+	}
+	else if ((ret = tgetent(buf, getenv("TERM"))))
+		if (ret < 1)
+		{
+			ft_dprintf(STDERR_FILENO, ret ? "Error: Terminfo not found\n" :
+					"Error: No terminal entry\n");
+			exit(1);
+		}
+}
 
 void			ft_do_cap(char *cap)
 {
