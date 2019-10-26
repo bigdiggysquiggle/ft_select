@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 19:36:29 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 21:30:42 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 21:32:34 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	construct_window(t_select *sel, char **tab)
 	int	i;
 
 	width = sel->ws->ws_col - 1;
-	cols = (width-- - 4) / LONGEST;
+	cols = (width - 4) / LONGEST;
 	height = CONTROLS % cols ? (CONTROLS / cols) + 1 : CONTROLS / cols;
 	ftgoto(0, 0);
 	repchar('_', width);
