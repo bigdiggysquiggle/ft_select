@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 02:38:02 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 21:38:30 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ static void		handle_input(t_select *sel, char *c)
 		select_all(sel, c[0] == 'a');
 	if (ft_strequ("s", c))
 		secret(sel);
+	if (ft_strequ("h", c))
+		print_help(sel);
 }
 
 static t_select	*ft_select(t_select *sel)

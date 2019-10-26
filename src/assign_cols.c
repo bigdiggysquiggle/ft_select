@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:13:55 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 20:38:15 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 21:35:21 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static int	assign_pos(t_select *start, int len)
 
 	ioctl(STDIN_FILENO, TIOCGWINSZ, start->ws);
 	width = 0;
-	row = start->head;
+	row = 0;
 	start->first->col = 0;
-	start->first->row = start->head;
+	start->first->row = 0;
 	list = start->first->next;
 	while (list != start->first)
 	{

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.c                                           :+:      :+:    :+:   */
+/*   help.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 19:36:29 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 21:32:34 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 21:39:42 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ static void	construct_window(t_select *sel, char **tab)
 	}
 	ftgoto(0, i);
 	repchar('_', width);
-	sel->head = height + 3;
 	print_controls(sel, tab);
 }
 
-void		print_header(t_select *sel)
+void		print_help(t_select *sel)
 {
 	char	*tab[CONTROLS + 1];
 
+	ft_do_cap("cl");
 	tab[0] = "Arrows: move cursor";
 	tab[1] = "Space: select item";
 	tab[2] = "A/D: select/deselect all";
@@ -77,6 +77,7 @@ void		print_header(t_select *sel)
 	tab[4] = "Del/Backspace: remove item";
 	tab[5] = "Enter: quit, print selection";
 	tab[6] = "Esc: quit without printing";
+	tab[7] = "H: help";
 	tab[CONTROLS - 1] = "S: secret ;)";
 	tab[CONTROLS] = NULL;
 	construct_window(sel, tab);
