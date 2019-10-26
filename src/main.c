@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 22:09:24 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 22:41:05 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void			screen_save_clear(int mode, t_select *sel)
 		sel->termios->c_lflag &= ~(ECHO | ICANON);
 		tcsetattr(STDIN_FILENO, TCSANOW, sel->termios);
 		store_sel(sel);
-		ft_do_cap("cl");
 		ft_do_cap("ti");
+		ft_do_cap("cl");
 		ft_do_cap("vi");
 	}
 	else
