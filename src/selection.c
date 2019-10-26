@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 20:48:15 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 01:40:43 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 22:27:10 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	del_item(t_select *sel)
 void	select_item(t_select *sel)
 {
 	sel->options->sel = sel->options->sel ? 0 : 1;
+	sel->options = sel->options->next;
 	print_opts(sel);
 }
 
