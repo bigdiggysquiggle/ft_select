@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 16:39:42 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 02:37:45 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 20:47:42 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # define ESC "\e"
 # define ENTER "\n"
 # define HEAD_PAD 0
+# define CONTROLS 8
+# define LONGEST 30
 
 t_sel_list		*make_list(int ac, char **av);
 t_select		*make_select(t_sel_list *options);
@@ -43,6 +45,7 @@ void			print_selected(t_select *sel);
 void			ft_do_cap(char *cap);
 void			ftgoto(int col, int row);
 void			print_opts(t_select *sel);
+void			print_header(t_select *sel);
 void			columnize_opts(t_select *sel);
 void			del_item(t_select *sel);
 void			select_item(t_select *sel);

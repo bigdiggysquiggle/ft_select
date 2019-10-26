@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:13:55 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 02:37:26 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 20:38:15 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static int	assign_pos(t_select *start, int len)
 
 	ioctl(STDIN_FILENO, TIOCGWINSZ, start->ws);
 	width = 0;
-	row = HEAD_PAD;
+	row = start->head;
 	start->first->col = 0;
-	start->first->row = HEAD_PAD;
+	start->first->row = start->head;
 	list = start->first->next;
 	while (list != start->first)
 	{
@@ -53,7 +53,7 @@ void		columnize_opts(t_select *sel)
 	t_sel_list	*opts;
 	int			len;
 
-	len = 2;
+	len = LONGEST;
 	opts = sel->first;
 	len = len_check_lmoa(len, opts->len + 1);
 	opts = opts->next;
