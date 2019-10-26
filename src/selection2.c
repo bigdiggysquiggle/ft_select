@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 01:40:48 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 02:38:09 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/26 04:11:44 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,45 +27,56 @@ void		select_all(t_select *sel, int mode)
 	print_opts(sel);
 }
 
-static void	sec_gen(char ***tab)
+void		print_secret(t_select *sel, char **tab, int start)
 {
-	char	**new;
-
-	new = (char **)malloc(sizeof(char *) * 11);
-	new[0] = "   )\" .";
-	new[1] = "  /    \\      (\\-./";
-	new[2] = " /     |    _/ o. \\";
-	new[3] = "|      | .-\"      y)-";
-	new[4] = "|      |/       _/ \\";
-	new[5] = "\\     /j   _\".\\(@)";
-	new[6] = " \\   ( |    `.''  )";
-	new[7] = "  \\  _`-     |   /";
-	new[8] = "    \"  `-._  <_ (";
-	new[9] = "           `-.,),)";
-	new[10] = NULL;
-	*tab = new;
-}
-
-void		secret(t_select *sel)
-{
+	int				i;
 	int				row;
 	int				col;
-	char			**tab;
-	int				i;
 
 	ioctl(STDIN_FILENO, TIOCGWINSZ, sel->ws);
 	if (sel->ws->ws_col > 22 && sel->ws->ws_row > 12)
 	{
 		i = 0;
-		sec_gen(&tab);
-		ft_do_cap("cl");
 		col = sel->ws->ws_col / 2 - 11;
-		row = sel->ws->ws_row / 2 - 6;
+		row = start ? start : sel->ws->ws_row / 2 - 6;
 		while (tab[i])
 		{
 			ftgoto(col, row++);
 			ft_dprintf(STDIN_FILENO, "%s", tab[i++]);
 		}
-		free(tab);
+	}
+}
+
+void		secret(t_select *sel)
+{
+	char			*tab[11];
+
+	tab[0] = "   )\" .";
+	tab[1] = "  /    \\      (\\-./";
+	tab[2] = " /     |    _/ o. \\";
+	tab[3] = "|      | .-\"      y)-";
+	tab[4] = "|      |/       _/ \\";
+	tab[5] = "\\     /j   _\".\\(@)";
+	tab[6] = " \\   ( |    `.''  )";
+	tab[7] = "  \\  _`-     |   /";
+	tab[8] = "    \"  `-._  <_ (";
+	tab[9] = "           `-.,),)";
+	tab[10] = NULL;
+	print_secret(sel, tab, 0);
+}
+
+void		undel_item(t_select *sel)
+{
+	t_sel_list	*add;
+	t_sel_list	*next;
+	t_sel_list	*prev;
+
+	if (!is_empty(sel->del))
+	{
+		add = (t_sel_list *)pop(sel->del);
+		next = add->next;
+		prev = add->prev;
+		next->prev = add;
+		prev->next = add;
 	}
 }

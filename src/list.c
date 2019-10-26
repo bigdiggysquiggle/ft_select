@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 19:35:21 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 22:04:42 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/26 02:48:53 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ t_select			*make_select(t_sel_list *options)
 		sel->old = &old;
 		sel->status = 0;
 		sel->ws = (struct winsize *)malloc(sizeof(struct winsize));
+		sel->del = init_stack();
 		ioctl(STDIN_FILENO, TIOCGWINSZ, sel->ws);
 		return (sel);
 	}
@@ -110,5 +111,8 @@ void				free_sel(t_select *sel)
 		free(tmp);
 	}
 	free(sel->ws);
+	while (!is_empty(sel->del))
+		free(pop(sel->del));
+	free(sel->del);
 	free(sel);
 }

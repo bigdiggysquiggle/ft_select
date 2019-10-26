@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 17:47:25 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/04 18:02:05 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/26 02:26:59 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,17 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct		s_node
+{
+	void			*content;
+	struct s_node	*next;
+}					t_node;
+
+typedef struct		s_stack
+{
+	struct s_node	*top;
+}					t_stack;
 
 void				ft_bzero(void *s, size_t n);
 void				*ft_memccpy(void *dst, const void *src, int c, size_t n);
@@ -116,5 +127,10 @@ char				*ft_strwht(char *s);
 char				**array_join(char **sentence, char *word);
 int					ft_new_line(char **s, char **line, int fd, int ret);
 int					get_next_line(const int fd, char **line);
+struct s_stack		*init_stack(void);
+void				*pop(struct s_stack *stack);
+void				push(struct s_stack *stack, void *content);
+void				*peek(struct s_stack *stack);
+int					is_empty(struct s_stack *stack);
 
 #endif

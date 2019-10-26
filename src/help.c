@@ -6,16 +6,28 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 19:36:29 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 22:12:50 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/26 03:48:39 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "select.h"
 
-static void	repchar(char c, int i)
+static void	help_sql(t_select *sel, int height)
 {
-	while (i--)
-		write(STDIN_FILENO, &c, 1);
+	char			*tab[11];
+
+	tab[0] = "   )\" .              | /";
+	tab[1] = "  /    \\      (\\-./  |/";
+	tab[2] = " /     |    _/ o. \\";
+	tab[3] = "|      | .-\"      y)-";
+	tab[4] = "|      |/       _/ \\";
+	tab[5] = "\\     /j   _\".\\(@)";
+	tab[6] = " \\   ( |    `.''  )";
+	tab[7] = "  \\  _`-     |   /";
+	tab[8] = "    \"  `-._  <_ (";
+	tab[9] = "           `-.,),)";
+	tab[10] = NULL;
+	print_secret(sel, tab, height);
 }
 
 static void	print_controls(t_select *sel, char **tab)
@@ -40,15 +52,11 @@ static void	print_controls(t_select *sel, char **tab)
 	}
 }
 
-static void	construct_window(t_select *sel, char **tab)
+static void	help_printing(int width, int cols, t_select *sel, char **tab)
 {
-	int	width;
-	int	cols;
 	int	height;
 	int	i;
 
-	width = sel->ws->ws_col - 1;
-	cols = (width - 4) / LONGEST;
 	height = CONTROLS % cols ? (CONTROLS / cols) + 1 : CONTROLS / cols;
 	ftgoto(0, 0);
 	repchar('_', width);
@@ -62,7 +70,25 @@ static void	construct_window(t_select *sel, char **tab)
 	}
 	ftgoto(0, i);
 	repchar('_', width);
+	if (sel->ws->ws_row - (height + 2) > 10)
+		help_sql(sel, height + 2);
 	print_controls(sel, tab);
+}
+
+static void	construct_window(t_select *sel, char **tab)
+{
+	int	width;
+	int	cols;
+
+	width = sel->ws->ws_col - 1;
+	cols = (width - 4) / LONGEST;
+	if (!cols)
+	{
+		ftgoto(sel->ws->ws_col / 2 - 10, sel->ws->ws_row / 2);
+		ft_dprintf(STDERR_FILENO, "Window tooo smoll :(");
+	}
+	else
+		help_printing(width, cols, sel, tab);
 }
 
 void		print_help(t_select *sel)
@@ -75,9 +101,10 @@ void		print_help(t_select *sel)
 	tab[2] = "A/D: select/deselect all";
 	tab[3] = "I: invert selections";
 	tab[4] = "Del/Backspace: remove item";
-	tab[5] = "Enter: quit, print selection";
-	tab[6] = "Esc: quit without printing";
-	tab[CONTROLS - 1] = "S: secret ;)";
+	tab[5] = "U: undo deletion";
+	tab[6] = "Enter: quit, print selection";
+	tab[7] = "Esc: quit without printing";
+	tab[CONTROLS - 1] = "S: secret";
 	tab[CONTROLS] = NULL;
 	construct_window(sel, tab);
 }

@@ -2,4 +2,4 @@ verify that empty env is no p
 
 fancy colours
 
-env -i ./ft_select *
+change box corners for more boxiness

@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 11:14:01 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 00:17:26 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/26 04:24:52 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void			echo_bytes(char *s, int len)
 	i = 0;
 	sel = store_sel(0);
 	while (i < len)
-		ft_dprintf(STDIN_FILENO, "%d\t", s[i++]);
+		ft_dprintf(STDIN_FILENO, "%hhd\t", s[i++]);
 	ft_dprintf(STDIN_FILENO, "\n");
 }
 

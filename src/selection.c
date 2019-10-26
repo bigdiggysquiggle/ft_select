@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 20:48:15 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 22:27:10 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/26 02:29:47 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	del_item(t_select *sel)
 			sel->first = next;
 		print_opts(sel);
 	}
-	free(rm);
+	push(sel->del, rm);
 }
 
 void	select_item(t_select *sel)

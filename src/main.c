@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 22:41:05 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/26 04:25:31 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void			screen_save_clear(int mode, t_select *sel)
 	}
 }
 
-static char		*read_chars(char *msg)
+char			*read_chars(char *msg)
 {
 	int		ret;
 
@@ -45,30 +45,23 @@ static char		*read_chars(char *msg)
 
 static void		handle_input(t_select *sel, char *c)
 {
-	if (ft_strequ(SPACE, c))
-		select_item(sel);
-	if (ft_strequ(LEFT, c))
-		move_hor(sel, 1);
-	if (ft_strequ(RIGHT, c))
-		move_hor(sel, 0);
-	if (ft_strequ(UP, c))
-		move_ver(sel, 1);
-	if (ft_strequ(DOWN, c))
-		move_ver(sel, 0);
-	if (ft_strequ(DEL, c) || ft_strequ(BS, c))
-		del_item(sel);
-	if (ft_strequ(ESC, c))
-		sel->status = 2;
-	if (ft_strequ(ENTER, c))
-		sel->status = 1;
-	if (ft_strequ("i", c))
-		invert_selection(sel);
-	if (ft_strequ("a", c) || ft_strequ("d", c))
-		select_all(sel, c[0] == 'a');
+	ft_strequ(SPACE, c) ? select_item(sel) : 0;
+	ft_strequ(LEFT, c) ? move_hor(sel, 1) : 0;
+	ft_strequ(RIGHT, c) ? move_hor(sel, 0) : 0;
+	ft_strequ(UP, c) ? move_ver(sel, 1) : 0;
+	ft_strequ(DOWN, c) ? move_ver(sel, 0) : 0;
+	ft_strequ(DEL, c) || ft_strequ(BS, c) ? del_item(sel) : 0;
+	ft_strequ(ESC, c) ? sel->status = 2 : 0;
+	ft_strequ(ENTER, c) ? sel->status = 1 : 0;
+	ft_strequ("i", c) ? invert_selection(sel) : 0;
+	ft_strequ("a", c) || ft_strequ("d", c) ? select_all(sel, c[0] == 'a') : 0;
+	ft_strequ("h", c) ? print_help(sel) : 0;
+	ft_strequ("u", c) ? undel_item(sel) : 0;
 	if (ft_strequ("s", c))
+	{
+		ft_do_cap("cl");
 		secret(sel);
-	if (ft_strequ("h", c))
-		print_help(sel);
+	}
 }
 
 static t_select	*ft_select(t_select *sel)

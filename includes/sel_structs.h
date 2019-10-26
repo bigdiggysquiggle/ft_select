@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 19:20:23 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 21:36:06 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/26 02:28:45 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ struct	s_select
 	struct termios	*old;
 	int				status;
 	struct winsize	*ws;
+	struct s_stack	*del;
 };
 
 #endif
