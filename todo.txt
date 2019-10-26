@@ -1,15 +1,3 @@
-Ctrl+C=SIGINT
-Ctrl+\=SIGQUIT
-Ctrl+Z=SIGTSTP
-
 verify that empty env is no p
-
-s to search a string
-
-header with controls printed in it
-	arrows to move, space select, del/bs delete, esc exit no print,
-	enter exit print, i invert selection, a select all, d deselect all,
-	s secret squirrel
---issue on redraw
 
 fancy colours
