@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 17:47:17 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 21:38:30 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/25 21:50:12 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int				main(int ac, char **av)
 {
 	t_select		*sel;
 	t_sel_list		*list;
+	int				ret;
 	static char		buf[2048];
 
 	sel = NULL;
@@ -99,9 +100,15 @@ int				main(int ac, char **av)
 	{
 		if ((sel = make_select(list)))
 		{
-			tgetent(buf, getenv("TERM"));
-			screen_save_clear(0, sel);
-			sel = ft_select(sel);
+			ret = tgetent(buf, getenv("TERM"));
+			if (ret < 1)
+				ft_dprintf(STDERR_FILENO, ret ? "Error: Terminfo not found\n"
+						: "Error: No terminal entry\n");
+			else
+			{
+				screen_save_clear(0, sel);
+				sel = ft_select(sel);
+			}
 		}
 	}
 	else
