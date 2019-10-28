@@ -15,10 +15,8 @@
 void			echo_bytes(char *s, int len)
 {
 	int			i;
-	t_select	*sel;
 
 	i = 0;
-	sel = store_sel(0);
 	while (i < len)
 		ft_dprintf(STDIN_FILENO, "%hhd\t", s[i++]);
 	ft_dprintf(STDIN_FILENO, "\n");

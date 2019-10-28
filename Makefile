@@ -25,7 +25,7 @@ all: $(NAME)
 $(NAME):
 	make -C ./libft reclean
 	gcc -Wall -Werror -Wextra -c $(I) $(SRCS) 
-	gcc -Wall -Werror -Wextra -o $(NAME) $(O) $(I) $(L) -ltermcap
+	gcc -Wall -Werror -Wextra -o $(NAME) $(O) $(I) $(L) -lncurses
 
 clean:
 	make -C ./libft clean

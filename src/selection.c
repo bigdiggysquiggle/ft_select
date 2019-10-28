@@ -34,9 +34,9 @@ void	del_item(t_select *sel)
 		sel->options = rm->next == sel->first ? prev : next;
 		if (rm == sel->first)
 			sel->first = next;
+		push(sel->del, rm);
 		print_opts(sel);
 	}
-	push(sel->del, rm);
 }
 
 void	select_item(t_select *sel)

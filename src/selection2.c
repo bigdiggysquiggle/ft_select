@@ -78,5 +78,8 @@ void		undel_item(t_select *sel)
 		prev = add->prev;
 		next->prev = add;
 		prev->next = add;
+		if (!add->col && !add->row)
+			sel->first = add;
+		print_opts(sel);
 	}
 }

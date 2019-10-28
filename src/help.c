@@ -73,6 +73,7 @@ static void	help_printing(int width, int cols, t_select *sel, char **tab)
 	if (sel->ws->ws_row - (height + 2) > 10)
 		help_sql(sel, height + 2);
 	print_controls(sel, tab);
+	ft_dprintf(STDIN_FILENO, "{eoc}");
 }
 
 static void	construct_window(t_select *sel, char **tab)
@@ -106,5 +107,6 @@ void		print_help(t_select *sel)
 	tab[7] = "Esc: quit without printing";
 	tab[CONTROLS - 1] = "S: secret";
 	tab[CONTROLS] = NULL;
+	ft_dprintf(STDIN_FILENO, "{yellow}");
 	construct_window(sel, tab);
 }

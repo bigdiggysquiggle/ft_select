@@ -19,6 +19,8 @@
 static void	print_item(t_sel_list *list, int ul)
 {
 	ftgoto(list->col, list->row);
+	ft_dprintf(STDIN_FILENO, list->sel ? "\033[38;5;81m" :
+			"\033[38;5;57m");
 	if (list->sel)
 		ft_dprintf(STDIN_FILENO, "%s", REV);
 	if (ul)
@@ -48,7 +50,8 @@ void		print_opts(t_select *sel)
 		list = list->next;
 	}
 	ftgoto(0, list->prev->row + 2);
-	ft_putstr_fd("H: print help", STDERR_FILENO);
+	ft_dprintf(STDIN_FILENO, "\033[38;5;226mH: print help%s",
+			NORM);
 }
 
 void		print_selected(t_select *sel)
