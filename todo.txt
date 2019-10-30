@@ -1,5 +1,9 @@
-verify that empty env is no p
+colours for different file types
 
-fancy colours
+scrolling/truncated lines for small window sizes
+
+vertical line scroll for large input
 
 change box corners for more boxiness
+
+second list for deleted items in case you want to add multiple back/want an old deletion back?
