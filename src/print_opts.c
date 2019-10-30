@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 19:56:36 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/26 03:25:21 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/30 14:24:27 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void		print_opts(t_select *sel)
 	if (sel->col_count < 0)
 	{
 		ftgoto(sel->ws->ws_col / 2 - 10, sel->ws->ws_row / 2);
-		ft_dprintf(STDERR_FILENO, "Window tooo smoll :(");
+		ft_dprintf(STDERR_FILENO, "{red}Window tooo smoll :({eoc}");
 		return ;
 	}
 	list = sel->first;
