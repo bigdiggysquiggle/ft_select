@@ -1,5 +1,7 @@
 colours for different file types
 
+esc to exit help box
+
 scrolling/truncated lines for small window sizes
 
 vertical line scroll for large input
