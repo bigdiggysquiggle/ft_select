@@ -25,7 +25,7 @@ all: $(NAME)
 $(NAME):
 	make -C ./libft reclean
 	gcc -Wall -Werror -Wextra -c $(I) $(SRCS) 
-	gcc -Wall -Werror -Wextra -o $(NAME) $(O) $(I) $(L) -lncurses
+	gcc -Wall -Werror -Wextra -o $(NAME) $(O) $(I) $(L) -lcurses
 
 clean:
 	make -C ./libft clean
@@ -43,7 +43,7 @@ reclean: re
 sre: fclean
 	make -C ./libft sreclean
 	gcc -g -Wall -Werror -Wextra -c $(I) $(SRCS)
-	gcc -g -Wall -Werror -Wextra -o $(NAME) $(O) $(I) $(L) -ltermcap
+	gcc -g -Wall -Werror -Wextra -o $(NAME) $(O) $(I) $(L) -lcurses
 
 sreclean: sre
 	make clean
@@ -51,11 +51,11 @@ sreclean: sre
 fre: fclean
 	make -C ./libft reclean
 	gcc -fsanitize=address -Wall -Werror -Wextra $(I) -c $(SRCS)
-	gcc -fsanitize=address -Wall -Werror -Wextra $(I) -o $(NAME) $(O) $(L) -ltermcap
+	gcc -fsanitize=address -Wall -Werror -Wextra $(I) -o $(NAME) $(O) $(L) -lcurses
 
 test: clean
 	gcc -Wall -Werror -Wextra -c $(I) $(SRCS) 
-	gcc -Wall -Werror -Wextra -o $(NAME) $(O) $(I) $(L) -ltermcap
+	gcc -Wall -Werror -Wextra -o $(NAME) $(O) $(I) $(L) -lcurses
 	make clean
 	./$(NAME) *
 
