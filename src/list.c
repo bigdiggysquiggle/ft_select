@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 19:35:21 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/26 02:48:53 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/10/31 23:45:48 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ t_select			*make_select(t_sel_list *options)
 	static struct termios	termios;
 	static struct termios	old;
 
-	if ((sel = (t_select *)malloc(sizeof(t_select))) && !tcgetattr(0, &termios))
+	if ((sel = (t_select *)malloc(sizeof(t_select))) &&
+			!tcgetattr(STDIN_FILENO, &termios))
 	{
 		ft_memcpy(&old, &termios, sizeof(struct termios));
 		sel->first = options;
@@ -90,7 +91,10 @@ t_select			*make_select(t_sel_list *options)
 		ft_dprintf(STDERR_FILENO,
 				"Error: failed to generate selection list.\n");
 	else
+	{
+		free(sel);
 		ft_dprintf(STDERR_FILENO, "Error: Couldn't get terminal attributes\n");
+	}
 	return (NULL);
 }
 

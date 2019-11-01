@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 15:54:24 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 03:06:10 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/11/01 01:14:31 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	sel_int(int sig)
 		tcsetattr(STDIN_FILENO, TCSANOW, sel->old);
 		screen_save_clear(1, sel);
 		free_sel(sel);
-		exit(1);
+		exit(130);
 	}
 }
 

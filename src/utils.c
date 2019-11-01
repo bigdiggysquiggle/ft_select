@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 18:25:42 by dromansk          #+#    #+#             */
-/*   Updated: 2019/10/25 22:10:08 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/11/01 02:05:32 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void			error_checks(void)
 		{
 			ft_dprintf(STDERR_FILENO, ret ? "Error: Terminfo not found\n" :
 					"Error: No terminal entry\n");
-			exit(1);
+			exit(2);
 		}
 }
 
@@ -42,9 +42,10 @@ void			ft_do_cap(char *cap)
 void			ftgoto(int col, int row)
 {
 	char	*s;
+	char	*t;
 
-	s = tgetstr("cm", NULL);
-	s = tgoto(s, col, row);
+	t = tgetstr("cm", NULL);
+	s = tgoto(t, col, row);
 	tputs(s, 1, selchar);
 }
 

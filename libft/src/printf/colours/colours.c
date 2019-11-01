@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 14:57:14 by dromansk          #+#    #+#             */
-/*   Updated: 2019/02/05 16:53:36 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/11/01 00:01:21 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int		colour(char *format)
 	code = colourcode(format);
 	while (i <= 6 && ft_strcmp(code, g_colour[i].colour))
 		i++;
+	free(code);
 	return (i);
 }
 
