@@ -6,7 +6,7 @@
 #    By: dromansk <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/22 14:53:52 by dromansk          #+#    #+#              #
-#    Updated: 2019/09/23 19:20:12 by dromansk         ###   ########.fr        #
+#    Updated: 2019/11/05 04:14:07 by dromansk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,10 +41,12 @@ re: fclean all
 reclean: re
 	make clean
 
-sreclean: fclean
+sre: fclean
 	gcc -Wall -Werror -Wextra $(I) $(SRCS) -c -g
 	ar rcs $(NAME) $(O)
 	ranlib $(NAME)
+
+sreclean: sre
 	make clean
 
 compile:
@@ -53,7 +55,7 @@ compile:
 scompile:
 	gcc main.c $(I) $(L) -o ftest -g
 
-test: sreclean
+test: sre
 	make scompile
 	./ftest | cat -e
 

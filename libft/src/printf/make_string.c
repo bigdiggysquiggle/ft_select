@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 14:34:10 by dromansk          #+#    #+#             */
-/*   Updated: 2019/09/23 19:09:12 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/11/05 04:15:26 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,24 @@ int		get_data(va_list *args, char *format, char **buf)
 	return (b);
 }
 
-int		putnstr_fd(char *str, int fd, size_t len)
+int		putnstr_fd(char **ret, char *str, int fd, size_t len)
 {
-	write(fd, str, len);
-	free(str);
+	if (!ret)
+	{
+		write(fd, str, len);
+		free(str);
+	}
+	else if (*ret)
+	{
+		ft_memcpy(*ret, str, ft_strlen(str));
+		free(str);
+	}
+	else
+		*ret = str;
 	return (len);
 }
 
-int		make_string(const char *restrict format, va_list *args, int fd)
+int		make_string(char **ret, const char *restrict format, va_list *args, int fd)
 {
 	char	*string;
 	char	*buf;
@@ -79,5 +89,5 @@ int		make_string(const char *restrict format, va_list *args, int fd)
 		format++;
 		format += flag_skip((char *)format) + 1;
 	}
-	return (putnstr_fd(string, fd, len));
+	return (putnstr_fd(ret, string, fd, len));
 }

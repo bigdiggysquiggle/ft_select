@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 15:47:32 by dromansk          #+#    #+#             */
-/*   Updated: 2019/02/28 16:57:02 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/11/05 04:04:40 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@
 */
 int			ft_printf(const char *restrict format, ...);
 int			ft_dprintf(int fd, const char *restrict format, ...);
-int			make_string(const char *restrict format, va_list *args, int fd);
+int			ft_asprintf(char **ret, const char *format, ...);
+int			ft_sprintf(char *restrict str, const char *restrict format, ...);
+int			make_string(char **ret, const char *restrict format, va_list *args,
+		int fd);
 /*
 **flags related functions
 */
