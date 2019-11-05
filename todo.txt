@@ -9,3 +9,5 @@ vertical line scroll for large input
 change box corners for more boxiness
 
 second list for deleted items in case you want to add multiple back/want an old deletion back?
+
+search function. give a prompt, as letters are found highlight all matches, if no match blink screen
