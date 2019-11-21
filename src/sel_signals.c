@@ -6,7 +6,7 @@
 /*   By: dromansk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 15:54:24 by dromansk          #+#    #+#             */
-/*   Updated: 2019/11/01 01:14:31 by dromansk         ###   ########.fr       */
+/*   Updated: 2019/11/21 02:02:08 by dromansk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ void		sel_signals(void)
 	signal(SIGCONT, sel_cont);
 	signal(SIGQUIT, sel_int);
 	signal(SIGABRT, sel_int);
+	signal(SIGTERM, sel_int);
 	signal(SIGTSTP, sel_stop);
 }
